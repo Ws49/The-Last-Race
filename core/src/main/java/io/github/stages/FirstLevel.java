@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -36,7 +37,7 @@ class Line{
     }
 }
 
-public class MenuStage extends Stage {
+public class FirstLevel extends Stage {
 
     private ShapeRenderer sh;
     private SpriteBatch batch;
@@ -46,9 +47,10 @@ public class MenuStage extends Stage {
     int with=1600;
     int vel = 0;
     int playerX =0;
-    Texture carTexture;
+    TextureRegion carRegion;
+    Animation<TextureRegion> animation;
 
-    public MenuStage() {
+    public FirstLevel() {
         sh = new ShapeRenderer();
         lines = new ArrayList<Line>();
         for(int i =0; i < 160000; i++){
@@ -61,7 +63,7 @@ public class MenuStage extends Stage {
             lines.add(line);
         }
         batch = new SpriteBatch();
-        carTexture= new Texture("car.jpg");
+
         tam = lines.size();
     }
 
@@ -135,7 +137,7 @@ public class MenuStage extends Stage {
         sh.end();
         
         batch.begin();
-        batch.draw(new TextureRegion(carTexture, 85, 71, 196, 144),getWidth() / 2 - 100,0);
+
         batch.end();
     }
 }

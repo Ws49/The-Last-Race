@@ -3,16 +3,16 @@ package io.github.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 
-import io.github.stages.MenuStage;
+import io.github.stages.FirstLevel;
 
 
 
 public class Main extends ApplicationAdapter {
-    private MenuStage menu;
+    private FirstLevel menu;
     
     @Override
     public void create() {
-        menu = new MenuStage();
+        menu = new FirstLevel();
     }
 
     @Override
