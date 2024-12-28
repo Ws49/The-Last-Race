@@ -41,6 +41,8 @@ public class FirstLevel extends Stage {
 
     private ShapeRenderer sh;
     private SpriteBatch batch;
+    private Texture background;
+    
     List<Line> lines;
     int segL=200;
     int tam;
@@ -66,8 +68,6 @@ public class FirstLevel extends Stage {
 
         tam = lines.size();
     }
-
-
 
     void drawQuad(ShapeRenderer shapeRenderer, Color c,int x1, int y1, int w1, int x2, int y2, int w2){
             ShapeRenderer sh = shapeRenderer;
@@ -107,6 +107,11 @@ public class FirstLevel extends Stage {
             drawQuad(sh, road, (int)lineAux.X,(int)lineAux.Y,(int)lineAux.W,(int)line.X,(int)line.Y,(int)line.W);
             
         }
+    }
+
+    public void show() {
+        batch = new SpriteBatch();
+        background = new Texture("background.jpg");  
     }
 
     @Override
