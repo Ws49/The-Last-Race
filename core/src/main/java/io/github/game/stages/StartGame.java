@@ -17,6 +17,7 @@ import io.github.game.UIobjects.BuildingUI;
 import io.github.game.UIobjects.DrawablesUI;
 import io.github.game.UIobjects.RoadUI;
 import io.github.game.UIobjects.TypesBuildingUI;
+import io.github.game.UIobjects.MenuCarUI;
 
 
 public class StartGame extends Stage {
@@ -27,6 +28,7 @@ public class StartGame extends Stage {
     private BitmapFont font;
     private Screen mainGame;
     private DrawablesUI drawablesUI;
+    private MenuCarUI menuCar;
     private long lastBuildingTime;
     private long lastRoadTime;
     private long updateTransparecny;
@@ -61,17 +63,20 @@ public class StartGame extends Stage {
             for(int i =0; i < 5;i++){
                 RoadUI roadUI = new RoadUI();
                 if(i ==0 ){
-                    space = (roadUI.getWidth() * -1);
+                    space = ((int) ((float) roadUI.getWidth() * -1.2f));
                 }
                 roadUI.setX(space);
                 roadUI.setY(0);
                 drawablesUI.addDrawable(roadUI);
+
                 space += roadUI.getWidth();
             }
         }else{
             RoadUI roadUI = new RoadUI();
-            roadUI.setX((roadUI.getWidth() * -1));
+            roadUI.setX((int) ((float) roadUI.getWidth() * -1.2f));
+
             roadUI.setY(0);
+            roadUI.setSize(345, 80);
             drawablesUI.addDrawable(roadUI);
         }
         
@@ -102,6 +107,11 @@ public class StartGame extends Stage {
 
 
     public void updateScreen(){
+        menuCar = new MenuCarUI();
+        drawablesUI.addDrawable(menuCar);
+        menuCar.setX(0);
+        menuCar.setY(0);
+
         if (TimeUtils.millis() - lastBuildingTime > 3500) {
 			spawnBuilding();
 		}
@@ -167,5 +177,6 @@ public class StartGame extends Stage {
         music.dispose();
         MenuBackgroundTexture.dispose();
         titleGame.dispose();
+
     }
 }
