@@ -37,6 +37,7 @@ public class AssetsControl{
         assetManager.load("UI/Building/3.png",Texture.class);
         assetManager.load("UI/TitleGame/nameGame.png",Texture.class);
         assetManager.load("UI/Road/Road.png",Texture.class);
+        assetManager.load("Muscle/MOVE/WEST/Muscle_sheets.png",Texture.class);
         assetManager.load("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class);
         assetManager.finishLoading();
         
@@ -48,6 +49,7 @@ public class AssetsControl{
         textures.put("Building3", assetManager.get("UI/Building/3.png",Texture.class));
         textures.put("Title", assetManager.get("UI/TitleGame/nameGame.png",Texture.class));
         textures.put("Road", assetManager.get("UI/Road/Road.png",Texture.class));
+        textures.put("MenuCar", assetManager.get("Muscle/MOVE/WEST/Muscle_sheets.png",Texture.class));
 
         sounds.put("MainMusic", assetManager.get("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class));
         parameter = new FreeTypeFontParameter();

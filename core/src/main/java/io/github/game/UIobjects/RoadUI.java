@@ -50,4 +50,8 @@ public class RoadUI extends UIobject implements DrawableUI{
     public void setY(int y) {
         this.y = y;
     }
+    public void setSize(int width, int height) {    
+        this.width = width;
+        this.height = height;
+    }
 }
