@@ -6,6 +6,13 @@
       "name": "Lwjgl3Launcher",
       "request": "launch",
       "mainClass": "io.github.game.lwjgl3.Lwjgl3Launcher",
+      "projectName": "RacingGame-lwjgl3"
+    },
+    {
+      "type": "java",
+      "name": "Lwjgl3Launcher",
+      "request": "launch",
+      "mainClass": "io.github.game.lwjgl3.Lwjgl3Launcher",
       "projectName": "lwjgl3"
     },
     {
