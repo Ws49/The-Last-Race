@@ -15,16 +15,16 @@ public abstract class UIobject{
     protected int y;
     protected int width;
     protected int height;
-    public UIobject(String nameSprite,Vector2 sizeTextureRegion){
+    public UIobject(String nameSprite,Vector2 sizeTextureRegion,float duration){
         textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions(nameSprite,sizeTextureRegion);
-        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, 0.01f);
+        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, duration);
         currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         this.x=0;
         this.y=0;
     }
-    public UIobject(String nameSprite,Vector2 sizeTextureRegion,int x, int y){
+    public UIobject(String nameSprite,Vector2 sizeTextureRegion,int x, int y,float duration){
         textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions(nameSprite,sizeTextureRegion);
-        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, 0.01f);
+        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, duration);
         currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         this.x=x;
         this.y=y;

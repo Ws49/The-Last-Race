@@ -1,6 +1,7 @@
 package io.github.game.stages;
 
 
+
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -40,6 +41,7 @@ public class Menu extends Stage {
         startButton.addListener(event -> {
             if (event.isHandled()) {
                 ((GameScreen)mainGame).changeStage(new FirstLevel());
+                dispose();
             }
             return false;
         });

@@ -6,7 +6,6 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -37,8 +36,13 @@ public class AssetsControl{
         assetManager.load("UI/Building/3.png",Texture.class);
         assetManager.load("UI/TitleGame/nameGame.png",Texture.class);
         assetManager.load("UI/Road/Road.png",Texture.class);
-        assetManager.load("Muscle/MOVE/WEST/Muscle_sheets.png",Texture.class);
+        assetManager.load("UI/MuscleCar/Muscle_sheets.png",Texture.class);
         assetManager.load("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class);
+        assetManager.load("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class);
+        assetManager.load("Musics/RXBØRN - REPENT [Christian Phonk].mp3",Music.class);
+        assetManager.load("Musics/LOST LAND.mp3",Music.class);
+        assetManager.load("Musics/JESUS ARMOR.mp3",Music.class);
+        assetManager.load("Musics/JayXTurbo - REDEEM (w X-Ray) (CHRISTIAN PHONK).mp3",Music.class);
         assetManager.finishLoading();
         
         textures.put("Car", assetManager.get("Car.png", Texture.class));
@@ -49,9 +53,14 @@ public class AssetsControl{
         textures.put("Building3", assetManager.get("UI/Building/3.png",Texture.class));
         textures.put("Title", assetManager.get("UI/TitleGame/nameGame.png",Texture.class));
         textures.put("Road", assetManager.get("UI/Road/Road.png",Texture.class));
-        textures.put("MenuCar", assetManager.get("Muscle/MOVE/WEST/Muscle_sheets.png",Texture.class));
+        textures.put("MenuCar", assetManager.get("UI/MuscleCar/Muscle_sheets.png",Texture.class));
 
-        sounds.put("MainMusic", assetManager.get("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class));
+        sounds.put("Music1", assetManager.get("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class));
+        sounds.put("Music2", assetManager.get("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class));
+        sounds.put("Music3", assetManager.get("Musics/RXBØRN - REPENT [Christian Phonk].mp3",Music.class));
+        sounds.put("Music4", assetManager.get("Musics/LOST LAND.mp3",Music.class));
+        sounds.put("Musi5", assetManager.get("Musics/JESUS ARMOR.mp3",Music.class));
+        sounds.put("Music6", assetManager.get("Musics/JayXTurbo - REDEEM (w X-Ray) (CHRISTIAN PHONK).mp3",Music.class));
         parameter = new FreeTypeFontParameter();
         stateTime = 0f;
     }
@@ -97,5 +106,8 @@ public class AssetsControl{
         return animation.getKeyFrame(stateTime,true);
     }
 
+    public static float getStateTime() {
+        return stateTime;
+    }
 
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,8 +12,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.Screens.GameScreen;
+import io.github.game.UIobjects.BoxDrawablesUI;
 import io.github.game.UIobjects.BuildingUI;
-import io.github.game.UIobjects.DrawablesUI;
 import io.github.game.UIobjects.RoadUI;
 import io.github.game.UIobjects.TypesBuildingUI;
 import io.github.game.UIobjects.MenuCarUI;
@@ -27,7 +26,7 @@ public class StartGame extends Stage {
     private AssetsControl assetsControl;
     private BitmapFont font;
     private Screen mainGame;
-    private DrawablesUI drawablesUI;
+    private BoxDrawablesUI drawablesUI;
     private MenuCarUI menuCar;
     private long lastBuildingTime;
     private long lastRoadTime;
@@ -38,23 +37,33 @@ public class StartGame extends Stage {
 
     public StartGame(Screen mainGame) {
         batch = new SpriteBatch();
+   
         assetsControl = AssetsControl.getInstanceAssetsControl();
+           
         MenuBackgroundTexture = assetsControl.getTexture("MenuBackground");
         titleGame = assetsControl.getTexture("Title");
-        transparency = 0f;
         font = assetsControl.getFont("Font/Pixel.ttf", 12);
-        music = assetsControl.getMusic("MainMusic");
-        music.play();
-        music.setLooping(true);
+        music = assetsControl.getMusic("Music2");
+        
+
+        menuCar = new MenuCarUI();
+        drawablesUI = new BoxDrawablesUI();
         this.mainGame = mainGame;
 
-        drawablesUI = new DrawablesUI();
-        drawablesUI.setY(0);
-        drawablesUI.setX(0);
+        transparency = 0f;
         updateTransparecny = TimeUtils.millis();
         upTransparecny = true;
+
+        
+        drawablesUI.addDrawable(menuCar);
+        drawablesUI.setY(-25);
+        drawablesUI.setX(0);
+
         spawnBuilding();
         spawRoad();
+
+        music.play();
+        music.setLooping(true);
     }
 
     public void spawRoad(){
@@ -67,6 +76,7 @@ public class StartGame extends Stage {
                 }
                 roadUI.setX(space);
                 roadUI.setY(0);
+                roadUI.setSize(345, 150);
                 drawablesUI.addDrawable(roadUI);
 
                 space += roadUI.getWidth();
@@ -76,7 +86,7 @@ public class StartGame extends Stage {
             roadUI.setX((int) ((float) roadUI.getWidth() * -1.2f));
 
             roadUI.setY(0);
-            roadUI.setSize(345, 80);
+            roadUI.setSize(345, 150);
             drawablesUI.addDrawable(roadUI);
         }
         
@@ -107,10 +117,7 @@ public class StartGame extends Stage {
 
 
     public void updateScreen(){
-        menuCar = new MenuCarUI();
-        drawablesUI.addDrawable(menuCar);
-        menuCar.setX(0);
-        menuCar.setY(0);
+    
 
         if (TimeUtils.millis() - lastBuildingTime > 3500) {
 			spawnBuilding();
@@ -122,6 +129,7 @@ public class StartGame extends Stage {
 
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
             ((GameScreen)mainGame).changeStage(new Menu(mainGame));
+            this.dispose();
        }
 
        if(TimeUtils.millis() - updateTransparecny > 60){
@@ -146,6 +154,7 @@ public class StartGame extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        assetsControl.update(delta);
         drawablesUI.update();
         updateScreen();
     }
@@ -158,12 +167,12 @@ public class StartGame extends Stage {
         batch.draw(MenuBackgroundTexture, 0,0, getWidth(), getHeight());
         drawablesUI.draw(batch);
 
-        batch.setColor(0, 255, 255,transparency);
-        batch.draw(titleGame, 120,320, 400, 150);
-        batch.setColor(Color.WHITE);
+        //batch.setColor(0, 255, 255,transparency);
+        batch.draw(titleGame, 150,320, 700, 250);
+       // batch.setColor(Color.WHITE);
         font.setColor(0, 255, 255,transparency);
 
-        font.draw(batch, "PRESS ENTER", 270, getHeight()/2);
+        font.draw(batch, "PRESS ENTER", 440, 300);
         
 
         batch.end();

@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class BuildingUI extends UIobject implements DrawableUI{
 
     public BuildingUI(TypesBuildingUI typeBuildingUI){
-            super(typeBuildingUI.getNameType(),typeBuildingUI.getSizeTextureRegion());
+            super(typeBuildingUI.getNameType(),typeBuildingUI.getSizeTextureRegion(),0f);
             this.height = typeBuildingUI.getHeight();
             this.width = typeBuildingUI.getWidth();
 
     }
 
     public BuildingUI(TypesBuildingUI typeBuildingUI, int x, int y){
-        super(typeBuildingUI.getNameType(),typeBuildingUI.getSizeTextureRegion(),x,y);
+        super(typeBuildingUI.getNameType(),typeBuildingUI.getSizeTextureRegion(),x,y,0f);
         this.height = typeBuildingUI.getHeight();
         this.width = typeBuildingUI.getWidth();
 }

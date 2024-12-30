@@ -7,7 +7,7 @@ public class RoadUI extends UIobject implements DrawableUI{
     int width;
     int height;
     public RoadUI(){
-        super("Road", new Vector2(436, 190));
+        super("Road", new Vector2(436, 190),0f);
         this.width = 300;
         this.height = 80;
     }
