@@ -1,21 +1,24 @@
-package io.github.game.stages.Racing;
+package io.github.game.stages.Track;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 
-public class LineRoad {
-    double x,y,z; 
-    double DrawX,DrawY,DrawW; 
-    double scale, curve;
-    int roadW=2000;
-    double camD=0.84;
-    int width=1600;
-    int height = 768;
- 
+
+class LineRoad {
+    private double x,y,z; 
+    private double DrawX,DrawY,DrawW; 
+    private double scale, curve;
+    private final int roadW=2000;
+    private double camD=0.84;
+    private int width=1600;
+    private int height = 768;
+
     public LineRoad(){
         curve=x=y=z=0;
+
     }
+
 
     public void project(int camX, int camY, int camZ){
         scale = camD/(z-camZ);
@@ -33,7 +36,11 @@ public class LineRoad {
             int [] yPoints = {((y1 - 480) * -1) + 200,((y2 - 480) * -1) + 200,((y2 - 480) * -1) + 200,((y1 - 480) * -1) + 200};
             sh.triangle(xPoints[0] - 320,yPoints[0],xPoints[1] - 320,yPoints[1],xPoints[2] - 320,yPoints[2]);
             sh.triangle(xPoints[0] - 320,yPoints[0],xPoints[2] - 320,yPoints[2],xPoints[3] - 320,yPoints[3]);
+
+   
     }
+
+
 
     public double getX() {
         return x;
@@ -62,34 +69,14 @@ public class LineRoad {
     public double getDrawX() {
         return DrawX;
     }
-
-    public void setDrawX(double drawX) {
-        DrawX = drawX;
-    }
-
     public double getDrawY() {
         return DrawY;
-    }
-
-    public void setDrawY(double drawY) {
-        DrawY = drawY;
     }
 
     public double getDrawW() {
         return DrawW;
     }
 
-    public void setDrawW(double drawW) {
-        DrawW = drawW;
-    }
-
-    public double getScale() {
-        return scale;
-    }
-
-    public void setScale(double scale) {
-        this.scale = scale;
-    }
 
     public double getCurve() {
         return curve;
@@ -97,22 +84,6 @@ public class LineRoad {
 
     public void setCurve(double curve) {
         this.curve = curve;
-    }
-
-    public int getRoadW() {
-        return roadW;
-    }
-
-    public void setRoadW(int roadW) {
-        this.roadW = roadW;
-    }
-
-    public double getCamD() {
-        return camD;
-    }
-
-    public void setCamD(double camD) {
-        this.camD = camD;
     }
 
     public int getwidth() {

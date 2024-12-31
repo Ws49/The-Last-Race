@@ -3,7 +3,6 @@ package io.github.game.UIobjects;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //COMPOSITE
 public class BoxDrawablesUI implements DrawableUI{

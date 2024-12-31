@@ -90,7 +90,6 @@ public class StartGame extends Stage {
             drawablesUI.addDrawable(roadUI);
         }
         
-        lastRoadTime = TimeUtils.millis();
     }
 
 
@@ -99,18 +98,18 @@ public class StartGame extends Stage {
             int space =0;
             for(int i =0; i < 5;i++){
                 if(i == 0){
-                    space = (TypesBuildingUI.Building1.getWidth() * -1);
+                    space = (TypesBuildingUI.BUILDING1.getWidth() * -1);
                 }
 
-                drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.Building1,space,100));
-                drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.Building2,space,10));
-                drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.Building3,space,10));
-                space += TypesBuildingUI.Building1.getWidth();
+                drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.BUILDING1,space,100));
+                drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.BUILDING2,space,10));
+                drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.BUILDING3,space,10));
+                space += TypesBuildingUI.BUILDING1.getWidth();
             }
         }else{
-            drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.Building1,(TypesBuildingUI.Building1.getWidth() * -1),100)); 
-            drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.Building2,(TypesBuildingUI.Building2.getWidth() * -1),10));
-            drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.Building3,(TypesBuildingUI.Building3.getWidth() * -1),10));
+            drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.BUILDING1,(TypesBuildingUI.BUILDING1.getWidth() * -1),100)); 
+            drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.BUILDING2,(TypesBuildingUI.BUILDING2.getWidth() * -1),10));
+            drawablesUI.addDrawable(new BuildingUI(TypesBuildingUI.BUILDING3,(TypesBuildingUI.BUILDING3.getWidth() * -1),10));
         }
         lastBuildingTime = TimeUtils.millis();
     }

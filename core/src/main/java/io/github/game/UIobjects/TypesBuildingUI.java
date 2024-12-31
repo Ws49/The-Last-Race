@@ -3,9 +3,9 @@ package io.github.game.UIobjects;
 import com.badlogic.gdx.math.Vector2;
 
 public enum TypesBuildingUI {
-    Building1("Building1", new Vector2(576, 324),750,750),
-    Building2("Building2", new Vector2(576, 324),900,900),
-    Building3("Building3", new Vector2(576, 324),900,900);
+    BUILDING1("Building1", new Vector2(576, 324),750,750),
+    BUILDING2("Building2", new Vector2(576, 324),900,900),
+    BUILDING3("Building3", new Vector2(576, 324),900,900);
    
 
     private String nameType;

@@ -29,6 +29,7 @@ public class AssetsControl{
         sounds = new HashMap<String, Music>();
         
         assetManager.load("Car.png", Texture.class);
+        assetManager.load("Cars/OutrunCars.png", Texture.class);
         assetManager.load("buttom.png",Texture.class);
         assetManager.load("background.jpg",Texture.class);
         assetManager.load("UI/Building/1.png",Texture.class);
@@ -46,6 +47,7 @@ public class AssetsControl{
         assetManager.finishLoading();
         
         textures.put("Car", assetManager.get("Car.png", Texture.class));
+        textures.put("Truck", assetManager.get("Cars/OutrunCars.png", Texture.class));
         textures.put("ButtonStart", assetManager.get("buttom.png", Texture.class));
         textures.put("MenuBackground", assetManager.get("background.jpg", Texture.class));
         textures.put("Building1", assetManager.get("UI/Building/1.png",Texture.class));
