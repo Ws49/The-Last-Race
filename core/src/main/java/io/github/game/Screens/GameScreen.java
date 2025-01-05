@@ -5,17 +5,16 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import io.github.game.stages.FirstLevel;
+import io.github.game.stages.AdditionalGame.StartGame;
 
-
-
+//STATE
 public class GameScreen implements Screen {
-    private FirstLevel startGame;
+    private StartGame StartGame;
     private Stage currentStage;
 
     public GameScreen(){
-        startGame = new FirstLevel(); 
-        currentStage = startGame;  
+        StartGame = new StartGame(this); 
+        currentStage = StartGame;  
         Gdx.input.setInputProcessor(currentStage); 
     }
 
