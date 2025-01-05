@@ -20,8 +20,9 @@ public class Track {
     private int verticeDrawY2;
     private int verticeDrawW2;
 
-
-    public Track(int segmentLentgh) {
+    private float newCurve;
+    private PublisherCurve publicsherCurve;
+    public Track(int segmentLentgh, PublisherCurve publicsher) {
         linesRoads = new ArrayList<LineRoad>();
        
         this.segmentLentgh = segmentLentgh;
@@ -41,11 +42,11 @@ public class Track {
         this.verticeDrawW1 = 0;
         this.verticeDrawX1 = 0;
         this.verticeDrawY1 = 0;
-
+        this.newCurve = 0;
         this.verticeDrawW2 = 0;
         this.verticeDrawX2 = 0;
         this.verticeDrawY2 = 0;
-    
+        this.publicsherCurve = publicsher;
     }
 
     public void drawRoads(ShapeRenderer sh, SpriteBatch batch,int velPlayer, int playerX){
@@ -81,7 +82,13 @@ public class Track {
             lineAux.drawQuad(sh, rumble, verticeDrawX2,verticeDrawY2, (int)(verticeDrawW2 * 1.2), verticeDrawX1, verticeDrawY1,(int)(verticeDrawW1 * 1.2));
             lineAux.drawQuad(sh, road, verticeDrawX2 ,verticeDrawY2,(int)verticeDrawW2,verticeDrawX1,verticeDrawY1,verticeDrawW1); 
             lineAux.drawQuad(sh, divisor, verticeDrawX2,verticeDrawY2,(int)verticeDrawW2 / 16,verticeDrawX1,verticeDrawY1,verticeDrawW1 / 16); 
-    
+            
+
+        }
+
+        if(linesRoads.get(startPosition).getCurve() != newCurve ){
+            publicsherCurve.setCurve((float)linesRoads.get(startPosition).getCurve());
+            newCurve = (float)linesRoads.get(startPosition).getCurve();
         }
 
 
