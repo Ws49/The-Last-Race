@@ -62,6 +62,7 @@ public class AssetsControl{
         assetManager.load("Bosses/Ice.jpg",Texture.class);
         assetManager.load("Bosses/Sarah.jpg",Texture.class);
         assetManager.load("Bosses/Ws.jpg",Texture.class);
+        assetManager.load("Race/BackgroundRaces/back1.png", Texture.class);
 
         assetManager.load("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class);
         assetManager.load("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class);
@@ -105,6 +106,7 @@ public class AssetsControl{
         textures.put("IconIce",assetManager.get("Bosses/Ice.jpg",Texture.class));
         textures.put("IconSarah",assetManager.get("Bosses/Sarah.jpg",Texture.class));
         textures.put("IconWs",assetManager.get("Bosses/Ws.jpg",Texture.class));
+        textures.put("race1",assetManager.get("Race/BackgroundRaces/back1.png",Texture.class));
 
         musics.put("Music1", assetManager.get("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class));
         musics.put("Music2", assetManager.get("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class));

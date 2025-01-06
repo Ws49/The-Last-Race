@@ -1,8 +1,13 @@
 package io.github.game.stages.Game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import io.github.game.AssetsControl.AssetsControl;
@@ -22,6 +27,8 @@ public class FirstLevel extends Stage {
     private PlayerVehicle playerVeicle;
     private TruckVehicle truck;
     private PublisherCurve publisherCurve;
+    private Texture backgroungRace;
+    private int backgroundX;
 
     public FirstLevel() {
         sh = new ShapeRenderer();
@@ -31,7 +38,8 @@ public class FirstLevel extends Stage {
         publisherCurve = new PublisherCurve();
         publisherCurve.addListener(truck);
         track = new Track(200,publisherCurve);
-      
+        backgroungRace = AssetsControl.getInstanceAssetsControl().getTexture("race1");
+        backgroundX =0;  
     }
 
 
@@ -41,11 +49,22 @@ public class FirstLevel extends Stage {
         playerVeicle.update();
         AssetsControl.getInstanceAssetsControl().update(delta);
         truck.update(playerVeicle.getSpeed(),playerVeicle.getPlayerX());
+
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            backgroundX--;
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            backgroundX++;
+        }
     }
 
     @Override
     public void draw() {
         super.draw();
+        batch.begin();
+        batch.draw(backgroungRace, backgroundX,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        batch.end();
 
         sh.begin(ShapeType.Filled);
         track.drawRoads(sh,batch, playerVeicle.getSpeed(), playerVeicle.getPlayerX());
