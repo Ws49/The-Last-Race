@@ -83,7 +83,7 @@ public class TruckVehicle extends Vehicles implements ListenerCurve{
         } else if (posY > 280) {
             posX = 280;
         } 
-        System.out.println(posX);
+       
     }
 
     public void update(int speedPlayer, int playerX) {

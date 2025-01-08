@@ -14,7 +14,7 @@ import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.stages.Game.Track.PublisherCurve;
 import io.github.game.stages.Game.Track.Track;
 import io.github.game.stages.Game.Vehicles.PlayerVehicle;
-import io.github.game.stages.Game.Vehicles.TruckVehicle;
+
 
 
 
@@ -25,7 +25,7 @@ public class FirstLevel extends Stage {
 
     private Track track;
     private PlayerVehicle playerVeicle;
-    private TruckVehicle truck;
+    
     private PublisherCurve publisherCurve;
     private Texture backgroungRace;
     private int backgroundX;
@@ -34,9 +34,9 @@ public class FirstLevel extends Stage {
         sh = new ShapeRenderer();
         batch = new SpriteBatch();
         playerVeicle = new PlayerVehicle();
-        truck = new TruckVehicle();
+
         publisherCurve = new PublisherCurve();
-        publisherCurve.addListener(truck);
+    
         track = new Track(200,publisherCurve);
         backgroungRace = AssetsControl.getInstanceAssetsControl().getTexture("race1");
         backgroundX =0;  
@@ -48,7 +48,7 @@ public class FirstLevel extends Stage {
         super.act(delta);
         playerVeicle.update();
         AssetsControl.getInstanceAssetsControl().update(delta);
-        truck.update(playerVeicle.getSpeed(),playerVeicle.getPlayerX());
+
 
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             backgroundX--;
@@ -63,16 +63,17 @@ public class FirstLevel extends Stage {
     public void draw() {
         super.draw();
         batch.begin();
-        batch.draw(backgroungRace, backgroundX,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        //batch.draw(backgroungRace, backgroundX,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         batch.end();
 
         sh.begin(ShapeType.Filled);
-        track.drawRoads(sh,batch, playerVeicle.getSpeed(), playerVeicle.getPlayerX());
+        track.drawRoads(sh, playerVeicle.getSpeed(), playerVeicle.getPlayerX());
         sh.end();
         
         batch.begin();
+        track.drawObjedts(batch,playerVeicle.getSpeed());
         playerVeicle.draw(batch);
-        truck.draw(batch);
+       
         batch.end();
     }
 }

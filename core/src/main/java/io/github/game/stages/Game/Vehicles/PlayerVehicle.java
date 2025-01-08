@@ -9,13 +9,16 @@ import io.github.game.AssetsControl.AssetsControl;
 
 public class PlayerVehicle  extends Vehicles{
     private int playerX;
-
+    private int accelerate;
+    private float durationAnimation;
     public PlayerVehicle(){
-        super(400, 100,150,150);
+        super(400, 0,150,150);
         setColor(Color.WHITE);
+        durationAnimation  = 0.01f;
         textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Car",new Vector2(87,60));
-        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, 0.01f);
+        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, durationAnimation);
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
+        accelerate = 0;
     }
 
     public int getPlayerX() {
@@ -25,16 +28,31 @@ public class PlayerVehicle  extends Vehicles{
         this.playerX += playerX;
     }
     public void brake(){
-        if(speed > 200){
-        //    speed -= 200;
-        }
+        if(accelerate > 0){
+            accelerate -= 2;
+            speedUp(accelerate);
+         }
     }
 
     public void update(){
+
         super.update();
           if(Gdx.input.isKeyPressed(Input.Keys.UP)){
-            speedUp(200);
+            if(accelerate < 300){
+                accelerate += 1;
+                speedUp(accelerate);
+            }else{
+                accelerate = 300;
+                speedUp(accelerate);
+            }
+        }else{
+            if(accelerate > 0){
+               accelerate -= 2;
+               speedUp(accelerate);
+            }
+           
         }
+        
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
             if(getSpeed() > 0){
                brake();
@@ -54,5 +72,7 @@ public class PlayerVehicle  extends Vehicles{
             }
 
         }
+
+        
     }
 }

@@ -1,25 +1,53 @@
 package io.github.game.stages.Game.Track;
 
 import com.badlogic.gdx.graphics.Color;
-
-
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 
 
+
 class LineRoad {
-    private double x,y,z; 
-    private double DrawX,DrawY,DrawW; 
-    private double scale, curve;
+    private float x,y,z; 
+    private float DrawX,DrawY,DrawW; 
+    private float scale, curve,spriteX,clip;
+
+
     private final int roadW=2000;
-    private double camD=0.84;
+    private float camD=0.84f;
     private int width=1600;
     private int height = 768;
    
+    private Texture texture;
+
 
     public LineRoad(){
         curve=x=y=z=0;
+        spriteX=0;
+    }
 
+    void drawSpriteRoad(SpriteBatch batch){
+        int w = texture.getWidth();
+        int h = texture.getHeight();
+        float offsetX = DrawX +  scale * spriteX * width/2;
+        float offsetY = DrawY +  4;
+        float destW = w * DrawW / 266;
+        float destH = h * DrawW / 266;
+
+        offsetX += destW * spriteX; //offsetX
+        offsetY += destH * (-1); //offsetY
+
+        float clipH = offsetY+destH-clip;
+    
+        if(clipH < 0){
+            clipH =0;
+        }
+        if(clipH > destH){
+            return;
+        }
+        
+        batch.draw(texture, offsetX, offsetY,destW,destH);
     }
 
 
@@ -41,49 +69,68 @@ class LineRoad {
             sh.triangle(xPoints[0] - 320,yPoints[0],xPoints[2] - 320,yPoints[2],xPoints[3] - 320,yPoints[3]);
     }
 
+    public Texture getTexture() {
+        return texture;
+    }
 
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
+    public float getSpriteX() {
+        return spriteX;
+    }
 
-    public double getX() {
+    public void setSpriteX(float spriteX) {
+        this.spriteX = spriteX;
+    }
+
+    public void setClip(float clip){
+        this.clip = clip;
+    }
+    public float getClip(){
+        return clip;
+    }
+    public float getX() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public double getZ() {
+    public float getZ() {
         return z;
     }
 
-    public void setZ(double z) {
+    public void setZ(float z) {
         this.z = z;
     }
 
-    public double getDrawX() {
+    public float getDrawX() {
         return DrawX;
     }
-    public double getDrawY() {
+    public float getDrawY() {
         return DrawY;
     }
 
-    public double getDrawW() {
+    public float getDrawW() {
         return DrawW;
     }
 
 
-    public double getCurve() {
+    public float getCurve() {
         return curve;
     }
 
-    public void setCurve(double curve) {
+    public void setCurve(float curve) {
         this.curve = curve;
     }
 

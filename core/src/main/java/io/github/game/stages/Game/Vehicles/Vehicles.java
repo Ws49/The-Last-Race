@@ -14,7 +14,7 @@ public abstract class Vehicles {
     Animation<TextureRegion> animation;
     protected TextureRegion[][] textureRegions;
     protected TextureRegion currentTRegion;
-    protected int speed;
+    protected float speed;
     protected int metersTraveled;
 
 
@@ -57,10 +57,10 @@ public abstract class Vehicles {
     public void setColor(Color color) {
         this.color = color;
     }
-    public void speedUp(int accelerate){
+    public void speedUp(float accelerate){
         this.speed += accelerate;
     }
-    public int getSpeed() {
+    public float getSpeed() {
         return speed;
     }
     public void setSpeed(int speed) {

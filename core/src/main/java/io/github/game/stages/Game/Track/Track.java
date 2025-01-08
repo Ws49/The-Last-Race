@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import io.github.game.AssetsControl.AssetsControl;
+
+
+
 
 public class Track {
     private List<LineRoad> linesRoads;
@@ -21,7 +25,9 @@ public class Track {
     private int verticeDrawW2;
 
     private float newCurve;
-    private PublisherCurve publicsherCurve;
+    
+    private PublisherCurve publicsherCurve;   
+
     public Track(int segmentLentgh, PublisherCurve publicsher) {
         linesRoads = new ArrayList<LineRoad>();
        
@@ -31,11 +37,16 @@ public class Track {
             LineRoad line = new LineRoad();
             line.setZ((i * segmentLentgh));
 
-           if(i>400 && i < 700){
-                  line.setCurve(-0.5);
+        
+                 // line.setCurve(-0.5f);
+  
+            if(i > 750){
+                line.setY((float)Math.sin(i/30.0) * 1500);
             }
-            
-            line.setY(500);
+            if(i % 20 == 0){
+                line.setTexture( AssetsControl.getInstanceAssetsControl().getTexture("Building1"));
+                line.setSpriteX(-2.5f);
+            }
             linesRoads.add(line);
         }
     
@@ -49,15 +60,35 @@ public class Track {
         this.publicsherCurve = publicsher;
     }
 
-    public void drawRoads(ShapeRenderer sh, SpriteBatch batch,int velPlayer, int playerX){
-        int startPosition = velPlayer /segmentLentgh;
-        double x=0,dx =0;
+    public void drawObjedts(SpriteBatch batch, float velPlayer){
+        int startPosition = (int)velPlayer /segmentLentgh;
+        for(int i = startPosition+300; i > startPosition; i--){  
+            if(linesRoads.get( i % linesRoads.size()).getTexture() != null){
+                linesRoads.get( i % linesRoads.size()).drawSpriteRoad(batch);
+            }
+        }
+    }
+    public void drawRoads(ShapeRenderer sh, float velPlayer, int playerX){
+        int startPosition = (int)velPlayer /segmentLentgh;
+        float x=0,dx =0;
+        int camH = (int)(1500 + linesRoads.get(startPosition).getY()); 
+        float maxY = 768;
+
+
+        for(int i = startPosition; i < startPosition + 300; i++){  
         
-        for(int i = startPosition; i < startPosition + 300; i++){   
             LineRoad line = linesRoads.get(i % linesRoads.size());
-            line.project(playerX-(int)x,1500,velPlayer);
+            line.project(playerX-(int)x,camH,(startPosition * 200)- (i >= linesRoads.size() ?linesRoads.size() * 200: 0 ));
             x+=dx;
-            dx +=line.getCurve();
+            dx += line.getCurve();
+
+            line.setClip(maxY);
+            if(line.getDrawY()>=maxY){
+                continue;
+            }
+
+            maxY = line.getDrawY();
+ 
             Color grass = ((i / 2) % 2) == 0 ? new Color(0,0.8f,0,1) : Color.GREEN;
             Color rumble = ((i / 2) % 2) == 0 ? new Color(255,255,255,1) :  Color.RED;
             Color divisor = ((i / 2) % 2) == 0 ? Color.WHITE : Color.BLACK;
@@ -82,9 +113,9 @@ public class Track {
             lineAux.drawQuad(sh, rumble, verticeDrawX2,verticeDrawY2, (int)(verticeDrawW2 * 1.2), verticeDrawX1, verticeDrawY1,(int)(verticeDrawW1 * 1.2));
             lineAux.drawQuad(sh, road, verticeDrawX2 ,verticeDrawY2,(int)verticeDrawW2,verticeDrawX1,verticeDrawY1,verticeDrawW1); 
             lineAux.drawQuad(sh, divisor, verticeDrawX2,verticeDrawY2,(int)verticeDrawW2 / 16,verticeDrawX1,verticeDrawY1,verticeDrawW1 / 16); 
-            
 
         }
+
 
         if(linesRoads.get(startPosition).getCurve() != newCurve ){
             publicsherCurve.setCurve((float)linesRoads.get(startPosition).getCurve());
