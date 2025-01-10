@@ -39,30 +39,31 @@ public class Level extends Stage {
     }
 
     public void spawnVehicle(){
-        int typeVehicle = new Random().nextInt(1,6);
+        int typeVehicle = new Random().nextInt(1,8);
         switch (typeVehicle) {
             case 1:
-                System.out.println("1");
                 transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.TRUCK));
                 break;
 
             case 2:
-                System.out.println("2");
                 transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.POLICE));
                 break;
                 
             case 3:
-                System.out.println("3");
                 transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.TRUCK2));
                 break;
             
             case 4:
-                System.out.println("4");
                 transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.JEEP));
                 break;
             case 5:
-                System.out.println("5");
-                transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.SHELBY));
+                transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.CAR_PINK));
+                break;
+            case 6:
+                transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.TRUCK3));
+                break;
+            case 7:
+                transit.addParticipant(FactoryVehiclesTransit.getVehicle(TypesVehicleTransit.CAR_GREEN));
                 break;
         
             default:

@@ -3,6 +3,7 @@ package io.github.game.stages.Game;
 //COMPOSITE
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -35,15 +36,21 @@ public class Transit implements TransitParticipant{
     public void  updateWay(){
         participants.forEach(participant ->{
             if(participant instanceof TransitVehicles){
+
                 int startPosition = (int)((TransitVehicles)participant).getMetersTraveled() /segmentLentgh;
-                if((int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200) < 285 && (int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200) > -100){
+
+                if((int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200) < 385 && (int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200) > -100){
+                    
                     int posY = (int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200);
                     int posX = (int)((wayTransit.get(startPosition % wayTransit.size()).getDrawX() - wayTransit.get(startPosition % wayTransit.size()).getDrawW()) - 320);
                     ((TransitVehicles)participant).nextPoint(posY,posX );
                      ((TransitVehicles)participant).setpostionValid(true);
+
                 }else{
+
                     ((TransitVehicles)participant).setpostionValid(false);
                     ((TransitVehicles)participant).setInScreen(false);
+
                 }
             }
 
@@ -60,7 +67,9 @@ public class Transit implements TransitParticipant{
 
     @Override
     public void draw(SpriteBatch batch) {
-        participants.forEach(participant->{
+        List<TransitParticipant> reversedParticipants = participants.reversed();
+        
+        reversedParticipants.forEach(participant->{
             if(participant instanceof TransitVehicles){
                 if(((TransitVehicles)participant).isInScreen()){
                     participant.draw(batch);

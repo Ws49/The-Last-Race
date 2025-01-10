@@ -46,7 +46,9 @@ public abstract class Vehicles {
         }
 
     }
- 
+
+    public abstract void update();
+    
     public Color getColor() {
         return color;
     }

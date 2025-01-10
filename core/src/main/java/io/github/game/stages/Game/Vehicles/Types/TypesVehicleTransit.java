@@ -8,9 +8,11 @@ import io.github.game.AssetsControl.AssetsControl;
 public enum TypesVehicleTransit {
     TRUCK(AssetsControl.getInstanceAssetsControl().getTextureRegions("OutrunCars", new Vector2(64, 64)),250,250,2,0f),
     JEEP(AssetsControl.getInstanceAssetsControl().getTextureRegions("OutrunCars", new Vector2(64, 64)),250,250,1,0f),
-    TRUCK2(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars", new Vector2(78,78f)),250,250,3,0f),
-    POLICE(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars", new Vector2(68,57)),250,200,3,0f),
-    SHELBY(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCarShelby", new Vector2(70,53)),250,200,0,0f);
+    TRUCK2(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars", new Vector2(78,78)),250,250,3,0f),
+    TRUCK3(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars2", new Vector2(125,145)),250,250,0,0f),
+    POLICE(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars", new Vector2(68,57)),200,200,3,0f),
+    CAR_PINK(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars2", new Vector2(125,82)),250,200,3,0f),
+    CAR_GREEN(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars2", new Vector2(115,78)),250,200,2,0f);
 
     private float durationAnimation;
 

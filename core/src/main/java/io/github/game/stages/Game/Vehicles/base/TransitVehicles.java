@@ -10,7 +10,7 @@ import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
 import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
 
-public class TransitVehicles extends Vehicles implements TransitParticipant{
+public abstract class TransitVehicles extends Vehicles implements TransitParticipant{
 
     private int positionInTrack = 0;
     private boolean postionValid;
@@ -36,7 +36,9 @@ public class TransitVehicles extends Vehicles implements TransitParticipant{
         setMetersTraveled(0);
     }
 
+    public abstract void upSize();
 
+    public abstract void downSize();
 
     public void nextPoint(float y, float x){
 
@@ -45,6 +47,7 @@ public class TransitVehicles extends Vehicles implements TransitParticipant{
                 width = 40;
                 height = 40;
                 posY = y;
+                System.out.println("HEY");
             }
             inScreen = true;
         }
@@ -53,16 +56,13 @@ public class TransitVehicles extends Vehicles implements TransitParticipant{
             posX = x + 10;
             if(posY < y){
                 posY ++;
-                width -= 1.1f;
-                height -= 1.1f;
+                downSize();
             }else if(posY > y && y > 0){
                 posY -- ;
-                width += 1.1f;
-                height += 1.1f;
+                upSize();
             }else if(posY > 0){
                 posY -- ;
-                width += 1.1f;
-                height += 1.1f;
+                upSize();
             }else if(posY <= 0){
                  postionValid = false;
             }
@@ -75,12 +75,10 @@ public class TransitVehicles extends Vehicles implements TransitParticipant{
         }
     }
 
-    
     @Override
     public void update() {
         metersTraveledUp(300);
     }
-
     @Override
     public void draw(SpriteBatch batch){
         super.draw(batch);

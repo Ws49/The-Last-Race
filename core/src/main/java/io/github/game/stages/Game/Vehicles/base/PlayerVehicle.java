@@ -36,7 +36,8 @@ public class PlayerVehicle  extends Vehicles{
             metersTraveledUp(accelerate);
          }
     }
-
+    
+    @Override
     public void update(){
           if(Gdx.input.isKeyPressed(Input.Keys.UP)){
             if(accelerate < 400){
