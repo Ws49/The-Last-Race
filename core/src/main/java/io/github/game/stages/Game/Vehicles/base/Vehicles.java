@@ -44,7 +44,6 @@ public abstract class Vehicles {
             batch.draw(currentTRegion, posX, posY,width,height);
             batch.setColor(Color.WHITE);
         }
-
     }
 
     public abstract void update();
