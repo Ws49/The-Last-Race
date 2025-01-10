@@ -11,7 +11,7 @@ public class PlayerVehicle extends Vehicles {
     private int playerX;
     private int accelerate;
     private float durationAnimation;
-    private boolean grama;
+    private boolean verifyvel;
 
     public PlayerVehicle() {
         super(400, 0, 150, 150);
@@ -21,7 +21,7 @@ public class PlayerVehicle extends Vehicles {
         animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, durationAnimation);
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         accelerate = 0;
-        grama = false;
+        verifyvel = false;
     }
 
     public int getPlayerX() {
@@ -55,11 +55,17 @@ public class PlayerVehicle extends Vehicles {
                 metersTraveledUp(accelerate);
             }
 
-            if (playerX <= -2600 && playerX >= -3200 && accelerate > 0) {
+            if(accelerate >= 150 && accelerate <= 400){
+                verifyvel = true;
+            }else{
+                verifyvel = false;
+            }
+
+            if (playerX <= -2600 && playerX >= -3200 && accelerate > 0 && verifyvel) {
                 accelerate -= 3;
 
             }
-            if (playerX >= 2600 && playerX <= 3200 && accelerate > 0) {
+            if (playerX >= 2600 && playerX <= 3200 && accelerate > 0 && verifyvel) {
                 accelerate -= 3;
             }
 
