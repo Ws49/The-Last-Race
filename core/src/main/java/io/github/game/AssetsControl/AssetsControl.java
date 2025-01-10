@@ -33,6 +33,8 @@ public class AssetsControl{
 
         assetManager.load("Car.png", Texture.class);
         assetManager.load("Cars/OutrunCars.png", Texture.class);
+        assetManager.load("Cars/TraficCars.png", Texture.class);
+        assetManager.load("Cars/Shelby.png", Texture.class);
         assetManager.load("backgrounds/background.jpg",Texture.class);
         assetManager.load("UI/Buttons/button.png",Texture.class);
         assetManager.load("UI/Buttons/buttonQuit.png",Texture.class);
@@ -76,7 +78,9 @@ public class AssetsControl{
         assetManager.finishLoading();
         
         textures.put("Car", assetManager.get("Car.png", Texture.class));
-        textures.put("Truck", assetManager.get("Cars/OutrunCars.png", Texture.class));        
+        textures.put("OutrunCars", assetManager.get("Cars/OutrunCars.png", Texture.class));        
+        textures.put("TraficCars", assetManager.get("Cars/TraficCars.png", Texture.class));        
+        textures.put("TraficCarShelby", assetManager.get("Cars/Shelby.png", Texture.class));        
         textures.put("BackgroundStart", assetManager.get("backgrounds/background.jpg", Texture.class));
         textures.put("ButtonPlay", assetManager.get("UI/Buttons/button.png", Texture.class));
         textures.put("ButtonQuit", assetManager.get("UI/Buttons/buttonQuit.png", Texture.class));

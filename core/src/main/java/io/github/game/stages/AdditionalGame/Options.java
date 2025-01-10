@@ -14,7 +14,7 @@ import io.github.game.stages.AdditionalGame.UIobjects.ButtonUI;
 import io.github.game.stages.AdditionalGame.UIobjects.CreditsBar;
 import io.github.game.stages.AdditionalGame.UIobjects.PanelSettings;
 import io.github.game.stages.AdditionalGame.UIobjects.TypesButtonUI;
-import io.github.game.stages.Game.FirstLevel;
+import io.github.game.stages.Game.Level;
 
 public class Options extends Stage{
     private Texture menuBackgroundTexture;
@@ -54,7 +54,7 @@ public class Options extends Stage{
             if(!isCredits){
                 if(event.isHandled()){
                     continueButton.Play();
-                    ((GameScreen) contextMainGame).changeStage(new FirstLevel());
+                    ((GameScreen) contextMainGame).changeStage(new Level());
                 }
                
             }
@@ -125,7 +125,7 @@ public class Options extends Stage{
             setColorButtonsOptions(new Color(255, 255, 255, 0f));
             creditsBar.update();
             if(creditsBar.getScretLevel() >= 3){
-                ((GameScreen) contextMainGame).changeStage(new FirstLevel());
+                ((GameScreen) contextMainGame).changeStage(new Level());
             }
         }
     }
