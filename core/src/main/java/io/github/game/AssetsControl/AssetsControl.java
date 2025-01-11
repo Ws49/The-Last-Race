@@ -61,11 +61,13 @@ public class AssetsControl{
         assetManager.load("UI/CityNeon/Sign 4/green.png",Texture.class);
         assetManager.load("UI/CityNeon/Sign 8/green.png",Texture.class);
         assetManager.load("UI/CityNeon/Sign 17/pink.png",Texture.class);
+        assetManager.load("UI/CityNeon/Sign 14/pink.png",Texture.class);
         assetManager.load("backgrounds/backgroundMenu.png",Texture.class);
         assetManager.load("Bosses/Ice.jpg",Texture.class);
         assetManager.load("Bosses/Sarah.jpg",Texture.class);
         assetManager.load("Bosses/Ws.jpg",Texture.class);
         assetManager.load("Race/BackgroundRaces/back1.png", Texture.class);
+        assetManager.load("Race/Cenary/outDorSega.png", Texture.class);
 
         assetManager.load("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class);
         assetManager.load("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class);
@@ -104,6 +106,7 @@ public class AssetsControl{
         textures.put("ElementyCity3", assetManager.get("UI/CityNeon/Sign 4/green.png",Texture.class));
         textures.put("ElementyCity4", assetManager.get("UI/CityNeon/Sign 8/green.png",Texture.class));
         textures.put("ElementyCity5", assetManager.get("UI/CityNeon/Sign 17/pink.png",Texture.class));
+        textures.put("ElementyCity6", assetManager.get("UI/CityNeon/Sign 14/pink.png",Texture.class));
         textures.put("BarVolume",assetManager.get("UI/Buttons/bar.png",Texture.class));
         textures.put("Sfx",assetManager.get("UI/Buttons/sfx.png",Texture.class));
         textures.put("Circle",assetManager.get("UI/Buttons/circle.png",Texture.class));
@@ -112,7 +115,7 @@ public class AssetsControl{
         textures.put("IconSarah",assetManager.get("Bosses/Sarah.jpg",Texture.class));
         textures.put("IconWs",assetManager.get("Bosses/Ws.jpg",Texture.class));
         textures.put("race1",assetManager.get("Race/BackgroundRaces/back1.png",Texture.class));
-
+        textures.put("OutdorSega",assetManager.get("Race/Cenary/outDorSega.png", Texture.class));
         musics.put("Music1", assetManager.get("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class));
         musics.put("Music2", assetManager.get("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class));
         musics.put("Music3", assetManager.get("Musics/RXBØRN - REPENT [Christian Phonk].mp3",Music.class));

@@ -12,9 +12,11 @@ public class PlayerVehicle extends Vehicles {
     private int accelerate;
     private float durationAnimation;
     private boolean verifySpeed;
+    private boolean isCollision;
+    private float valueCurve;
 
     public PlayerVehicle() {
-        super(400, 0, 150, 150);
+        super(400, 0, 250, 250);
         setColor(Color.WHITE);
         durationAnimation = 0.01f;
         textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Car", new Vector2(87, 60));
@@ -22,9 +24,10 @@ public class PlayerVehicle extends Vehicles {
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         accelerate = 0;
         verifySpeed = false;
+        isCollision = false;
     }
 
-    public int getPlayerX() {
+    public int getPlayerX() { 
         return playerX;
     }
 
@@ -40,19 +43,37 @@ public class PlayerVehicle extends Vehicles {
         }
     }
 
-    @Override
-    public void update() {
-        // verifica se o x do player esta na grama e reduz velocidade
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if (accelerate < 600) {
-                accelerate += 1;
-                metersTraveledUp(accelerate);
-            } else {
-                accelerate = 600;
-                metersTraveledUp(accelerate);
-            }
 
-            if(accelerate >= 150 && accelerate <= 600){
+    public void speedUp(){
+        if (accelerate < 600) {
+            accelerate += 1;
+            metersTraveledUp(accelerate);
+        } else {
+            accelerate = 600;
+            metersTraveledUp(accelerate);
+        }
+        if(accelerate < 0){
+            accelerate += 5;
+            metersTraveledUp(accelerate);
+        }
+    }
+
+    public void speedDown(){
+        if (accelerate > 0) {
+            accelerate -= 2;
+            metersTraveledUp(accelerate);
+        }
+        if(accelerate < 0){
+            accelerate += 5;
+            metersTraveledUp(accelerate);
+        }
+
+    }
+    
+    // verifica se o x do player esta na grama e reduz velocidade
+    public void speedDownOffRoad(){
+        
+        if(accelerate >= 150 && accelerate <= 600){
                 verifySpeed = true;
             }else{
                 verifySpeed = false;
@@ -65,13 +86,40 @@ public class PlayerVehicle extends Vehicles {
             if (playerX >= 2600 && playerX <= 3200 && accelerate > 0 && verifySpeed) {
                 accelerate -= 3;
             }
+    }
+    
 
-        } else {
-            if (accelerate > 0) {
-                accelerate -= 2;
-                metersTraveledUp(accelerate);
+    public void moveToBack(){
+        if(accelerate > -300){
+            accelerate -= 30;
+        }else{
+            accelerate = 0;
+        }
+        metersTraveledUp(accelerate);
+    }
+
+    public void updateMovimentInCurve(){
+        if(playerX < 3200 && playerX > -3200){
+            if(valueCurve > 0){
+                updatePLayerX(-30);
+            }else if(valueCurve < 0){
+                updatePLayerX(30);
             }
+        }
+    }
 
+    @Override
+    public void update(){
+        
+        super.update();
+
+        updateMovimentInCurve();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            speedUp();
+            speedDownOffRoad();
+        } else {
+            speedDown();
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -94,6 +142,22 @@ public class PlayerVehicle extends Vehicles {
 
         }
 
+        if(isCollision == true){
+            moveToBack();
+        }
+
+    }
+
+    public void setValueCurve(float valueCurve) {
+        this.valueCurve = valueCurve;
+    }
+
+    public boolean isCollision() {
+        return isCollision;
+    }
+
+    public void setCollision(boolean isCollision) {
+        this.isCollision = isCollision;
     }
 
     public int getAccelerate() {

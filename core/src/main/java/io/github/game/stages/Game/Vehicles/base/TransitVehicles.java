@@ -6,11 +6,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+
 import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
 import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
 
 public abstract class TransitVehicles extends Vehicles implements TransitParticipant {
+
 
     private boolean postionValid;
     private boolean oldPositionValid;
@@ -75,7 +78,7 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
                 }
 
                 inScreen = true;
-            } else if (coordY > -100) {
+            } else if (coordY >  -100) {
                 inScreen = true;
                 postionValid = true;
             }
@@ -179,8 +182,14 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
 
     @Override
     public void update() {
-        metersTraveledUp(speed);
+        super.update();
 
+        if(!inScreen){
+            hitBox.setY(-1000);
+            hitBox.setX(-1000);
+        }
+
+        metersTraveledUp(speed);
     }
 
     @Override
@@ -202,6 +211,11 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
 
     public void setpostionValid(boolean postionValid) {
         this.postionValid = postionValid;
+    }
+
+    @Override
+    public Rectangle getColision() {
+        return hitBox;
     }
 
 }

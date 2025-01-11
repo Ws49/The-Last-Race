@@ -4,48 +4,75 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
+class ObjectRoad{
+    private Texture textureObject;
+    private float width;
+    private float height;
+    private Rectangle hitBox;
+
+    public ObjectRoad(Texture texture, float width, float height){
+        this.textureObject = texture;
+        this.width = width;
+        this.height = height;
+        hitBox = new Rectangle();
+    }
+    
+    public Texture getTextureObject() {
+        return textureObject;
+    }
+
+    public float getWidth() {
+        return width;
+    }
+    public void setWidth(float width) {
+        this.width = width;
+    }
+    public float getHeight() {
+        return height;
+    }
+    public void setHeight(float height) {
+        this.height = height;
+    }
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+}
 
 public class LineRoad {
     private float x,y,z; 
     private float DrawX,DrawY,DrawW; 
     private float scale, curve,spriteX,clip;
 
-
+    private ObjectRoad objectRoad;
     private final int roadW=2000;
     private float camD=0.84f;
     private int width=1600;
     private int height = 768;
    
-    private Texture texture;
-
 
     public LineRoad(){
         curve=x=y=z=0;
         spriteX=0;
+        objectRoad = null;
     }
 
     void drawSpriteRoad(SpriteBatch batch){
-        int w = texture.getWidth();
-        int h = texture.getHeight();
-        float offsetX = DrawX +  scale * spriteX * width/2;
-        float offsetY = DrawY +  4;
+        int w = objectRoad.getTextureObject().getWidth();
+        int h = objectRoad.getTextureObject().getHeight();
+
         float destW = w * DrawW / 266;
         float destH = h * DrawW / 266;
 
-        offsetX += destW * spriteX; //offsetX
-        offsetY += destH * (-1); //offsetY
+        float scaleDistance; 
+        float posX;
 
-        float clipH = offsetY+destH-clip;
-    
-        if(clipH < 0){
-            clipH =0;
-        }
-        if(clipH > destH){
-            return;
-        }
-        
-        batch.draw(texture, offsetX, offsetY,destW,destH);
+        scaleDistance  = 1.0f - (DrawY/ 280);
+        posX = (DrawX - (DrawW + 320) * scaleDistance) - 400;
+
+        batch.draw(objectRoad.getTextureObject(), posX, (((DrawY- 480) * -1)+ 200),destW + objectRoad.getWidth() ,destH + objectRoad.getHeight());
+
     }
 
 
@@ -67,12 +94,12 @@ public class LineRoad {
             sh.triangle(xPoints[0] - 320,yPoints[0],xPoints[2] - 320,yPoints[2],xPoints[3] - 320,yPoints[3]);
     }
 
-    public Texture getTexture() {
-        return texture;
+    public ObjectRoad getObjectRoad() {
+        return objectRoad;
     }
 
-    public void setTexture(Texture texture) {
-        this.texture = texture;
+    public void setObjectRoad(ObjectRoad objectRoad) {
+        this.objectRoad = objectRoad;
     }
     public float getSpriteX() {
         return spriteX;

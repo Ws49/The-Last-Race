@@ -6,20 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
 import io.github.game.stages.Game.Track.LineRoad;
+import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
 import io.github.game.stages.Game.Vehicles.base.TransitVehicles;
 
 public class Transit implements TransitParticipant{
     ArrayList<TransitParticipant> participants;
     ArrayList<LineRoad> wayTransit;
     private int  segmentLentgh;
+    private float meters;
+    private PlayerVehicle player;
     
-    public Transit(ArrayList<LineRoad> wayTransit, int segmentLentgh){
+    public Transit(ArrayList<LineRoad> wayTransit, int segmentLentgh, PlayerVehicle player){
         participants = new ArrayList<TransitParticipant>();
         this.wayTransit = wayTransit;
         this.segmentLentgh = segmentLentgh;
+        this.meters = 0f;
+        this.player = player;
     }
 
     public void addParticipant(TransitParticipant participant){
@@ -57,21 +63,28 @@ public class Transit implements TransitParticipant{
 
         });
     }
-    // PSEUDO 3D AHAHAHHAAHAHHAHAHAHA
+
     @Override
     public void update() {   
-       
         participants.forEach(participant->{
             participant.update();
-            
         });
+
+        for (TransitParticipant transitParticipant : participants) {
+            if(transitParticipant.getColision().overlaps(player.getHitBox())){
+                player.setCollision(true);
+                break;
+            }else{
+                player.setCollision(false);
+            }
+        }
+
         updateWay();
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         List<TransitParticipant> reversedParticipants = participants.reversed();
-        
         reversedParticipants.forEach(participant->{
             if(participant instanceof TransitVehicles){
                 if(((TransitVehicles)participant).isInScreen()){
@@ -81,7 +94,29 @@ public class Transit implements TransitParticipant{
                 participant.draw(batch);
             }
         });
+
+       // ShapeRenderer sh = new ShapeRenderer();
+       // sh.begin(ShapeType.Filled);
+      //  reversedParticipants.forEach(participant->{
+      //    sh.rect(((TransitVehicles)participant).getHitBox().x,((TransitVehicles)participant).getHitBox().y,((TransitVehicles)participant).getHitBox().width,((TransitVehicles)participant).getHitBox().height);
+       // });
+        //sh.end();
     }
+
+    @Override
+    public float getMetersTraveled() {
+
+       participants.forEach(participants->{
+            meters += participants.getMetersTraveled();
+       });
+       return meters;
+    }
+
+    @Override
+    public Rectangle getColision() {
+        return null;
+    }
+    
 
 
 }

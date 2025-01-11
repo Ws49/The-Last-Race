@@ -1,6 +1,7 @@
 package io.github.game.stages.AdditionalGame.UIobjects;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -33,6 +34,7 @@ public class CitySignsDecorationUI extends UIobject implements DrawableUI {
     }
     @Override
     public void update() {
+
     }
     @Override
     public int getX() {

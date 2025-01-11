@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
+import com.badlogic.gdx.math.Rectangle;
 
 import io.github.game.AssetsControl.AssetsControl;
 
@@ -24,13 +24,17 @@ public abstract class Vehicles {
     protected float posY;
     protected Color color;
     protected boolean isOneTexutre;
+    protected Rectangle hitBox;
+
 
     public Vehicles(int posX,int posY,float width,float height){
        this.posX = posX;
        this.posY = posY;
        this.width = width;
        this.height = height;
- 
+       hitBox = new Rectangle();
+       hitBox.width = width;
+       hitBox.height =height;
     }
 
     public void draw(SpriteBatch batch){
@@ -45,8 +49,11 @@ public abstract class Vehicles {
             batch.setColor(Color.WHITE);
         }
     }
-
-    public abstract void update();
+    
+    public void update(){
+        hitBox.x = posX;
+        hitBox.y = posY;
+    };
     
     public Color getColor() {
         return color;
@@ -83,5 +90,9 @@ public abstract class Vehicles {
     
     public float getHeight() {
         return height;
+    }
+
+    public Rectangle getHitBox() {
+        return hitBox;
     }
 }

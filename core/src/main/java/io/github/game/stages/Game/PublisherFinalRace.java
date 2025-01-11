@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import io.github.game.stages.Game.InterfacesGame.ListenerFinalRace;
 
-public class PublicherFinalRace {
+public class PublisherFinalRace {
     ArrayList<ListenerFinalRace> listenersCurve;
     float curve;
 
