@@ -35,16 +35,22 @@ public class Transit implements TransitParticipant{
     }
     
     //Atualiza o caminho dos participantes do trÂnsito (oponentes)
-    // informa a els onde eles devem ir
+    // informa a els aonde eles devem ir
     public void  updateWay(){
         participants.forEach(participant ->{
             if(participant instanceof TransitVehicles){
 
-                int startPosition = (int)((TransitVehicles)participant).getMetersTraveled() /segmentLentgh;
-                    
+                int startPosition = (int)((TransitVehicles)participant).getMetersTraveled() /segmentLentgh; 
                     int posY = (int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200);
-                    int posX = (int)((wayTransit.get(startPosition % wayTransit.size()).getDrawX() - wayTransit.get(startPosition % wayTransit.size()).getDrawW()) - 320);
-                    ((TransitVehicles)participant).nextPoint(posY,posX);
+                    int posX;
+
+                    if(((TransitVehicles)participant).isRightRoad()){
+                        posX = (int)((wayTransit.get(startPosition % wayTransit.size()).getDrawX() + wayTransit.get(startPosition % wayTransit.size()).getDrawW()) - 320);
+                    }else{
+                        posX = (int)((wayTransit.get(startPosition % wayTransit.size()).getDrawX() - wayTransit.get(startPosition % wayTransit.size()).getDrawW()) - 320);
+                    }
+        
+                    ((TransitVehicles)participant).nextPoint(posX,posY);
                     ((TransitVehicles)participant).setpostionValid(true);
 
             }

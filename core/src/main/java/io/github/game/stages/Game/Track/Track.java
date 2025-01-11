@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import io.github.game.AssetsControl.AssetsControl;
+import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
 
 
 
@@ -24,12 +25,14 @@ public class Track {
     private int verticeDrawY2;
     private int verticeDrawW2;
     
- 
+    private PlayerVehicle playerVehicle;
 
-    public Track(int segmentLentgh) {
+    public Track(int segmentLentgh, PlayerVehicle player) {
         linesRoads = new ArrayList<LineRoad>();
        
         this.segmentLentgh = segmentLentgh;
+
+        this.playerVehicle = player;
 
         for(int i =0; i < 1600; i++){
             LineRoad line = new LineRoad();
@@ -60,8 +63,8 @@ public class Track {
         
     }
 
-    public void drawObjedts(SpriteBatch batch, float metersTraveledPlayer){
-        int startPosition = (int)metersTraveledPlayer /segmentLentgh;
+    public void drawObjedts(SpriteBatch batch){
+        int startPosition = (int)playerVehicle.getMetersTraveled() /segmentLentgh;
         for(int i = startPosition+300; i > startPosition; i--){  
             if(linesRoads.get( i % linesRoads.size()).getTexture() != null){
                 linesRoads.get( i % linesRoads.size()).drawSpriteRoad(batch);
@@ -81,9 +84,9 @@ public class Track {
         return positionPlayer;
     }
 
-    public void drawRoads(ShapeRenderer sh, float metersTraveledPlayer, int playerX){
+    public void drawRoads(ShapeRenderer sh){
         
-        metersTraveledPlayer = resetTrack(metersTraveledPlayer);
+        float metersTraveledPlayer = resetTrack(playerVehicle.getMetersTraveled());
         int startPosition = (int)metersTraveledPlayer /segmentLentgh;
         float x=0,dx =0;
         int camH = (int)(1500 + linesRoads.get(startPosition).getY()); 
@@ -93,7 +96,7 @@ public class Track {
         for(int i = startPosition; i < startPosition + 300; i++){  
         
             LineRoad line = linesRoads.get(i % linesRoads.size());
-            line.project(playerX-(int)x,camH,(startPosition * 200)- (i >= linesRoads.size() ?linesRoads.size() * 200: 0 ));
+            line.project(playerVehicle.getPlayerX()-(int)x,camH,(startPosition * 200)- (i >= linesRoads.size() ?linesRoads.size() * 200: 0 ));
             x+=dx;
             dx += line.getCurve();
 

@@ -11,7 +11,7 @@ public class PlayerVehicle extends Vehicles {
     private int playerX;
     private int accelerate;
     private float durationAnimation;
-    private boolean verifyvel;
+    private boolean verifySpeed;
 
     public PlayerVehicle() {
         super(400, 0, 150, 150);
@@ -21,7 +21,7 @@ public class PlayerVehicle extends Vehicles {
         animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, durationAnimation);
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         accelerate = 0;
-        verifyvel = false;
+        verifySpeed = false;
     }
 
     public int getPlayerX() {
@@ -44,26 +44,25 @@ public class PlayerVehicle extends Vehicles {
     public void update() {
         // verifica se o x do player esta na grama e reduz velocidade
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if (accelerate < 400) {
+            if (accelerate < 600) {
                 accelerate += 1;
                 metersTraveledUp(accelerate);
             } else {
-
-                accelerate = 400;
+                accelerate = 600;
                 metersTraveledUp(accelerate);
             }
 
-            if(accelerate >= 150 && accelerate <= 400){
-                verifyvel = true;
+            if(accelerate >= 150 && accelerate <= 600){
+                verifySpeed = true;
             }else{
-                verifyvel = false;
+                verifySpeed = false;
             }
 
-            if (playerX <= -2600 && playerX >= -3200 && accelerate > 0 && verifyvel) {
+            if (playerX <= -2600 && playerX >= -3200 && accelerate > 0 && verifySpeed) {
                 accelerate -= 3;
 
             }
-            if (playerX >= 2600 && playerX <= 3200 && accelerate > 0 && verifyvel) {
+            if (playerX >= 2600 && playerX <= 3200 && accelerate > 0 && verifySpeed) {
                 accelerate -= 3;
             }
 

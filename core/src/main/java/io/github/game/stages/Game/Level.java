@@ -39,7 +39,7 @@ public class Level extends Stage {
         sh = new ShapeRenderer();
         batch = new SpriteBatch();
         playerVeicle = new PlayerVehicle();
-        track = new Track(200);
+        track = new Track(200,playerVeicle);
         transit = new Transit(track.toWay(),200); 
         font = AssetsControl.getInstanceAssetsControl().getFont("Font/Pixel.ttf", 48);
         spawnVehicle();
@@ -101,7 +101,7 @@ public class Level extends Stage {
         batch.end();
 
         sh.begin(ShapeType.Filled);
-        track.drawRoads(sh, playerVeicle.getMetersTraveled(), playerVeicle.getPlayerX());
+        track.drawRoads(sh);
         sh.end();
         
         batch.begin();

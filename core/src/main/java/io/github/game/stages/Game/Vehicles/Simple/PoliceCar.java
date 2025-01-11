@@ -13,8 +13,8 @@ public class PoliceCar extends TransitVehicles {
     @Override
     public void upSize() {
         if (width < 200) {
-            width += 0.8f;
-            height += 0.8f;
+            width += 2.8f;
+            height += 2.8f;
         }
 
     }

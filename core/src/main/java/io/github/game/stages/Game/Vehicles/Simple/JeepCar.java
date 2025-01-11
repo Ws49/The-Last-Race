@@ -12,8 +12,8 @@ public class JeepCar extends TransitVehicles {
     @Override
     public void upSize() {
         if (width < 250) {
-            width += 1.1f;
-            height += 1.1f;
+            width += 2.1f;
+            height += 2.1f;
         }
 
     }

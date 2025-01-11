@@ -11,8 +11,8 @@ public class SimpleCar extends TransitVehicles{
     @Override
     public void upSize() {
         if(width < 250){
-            width += 0.7f;
-            height += 0.7f;  
+            width += 2.7f;
+            height += 2.7f;  
         }
 
     }
