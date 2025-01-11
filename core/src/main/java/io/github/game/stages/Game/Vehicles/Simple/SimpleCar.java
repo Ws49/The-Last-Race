@@ -19,10 +19,12 @@ public class SimpleCar extends TransitVehicles{
 
     @Override
     public void downSize() {
-        if(width > 50){
-            width -= 0.7f;
-            height -= 0.7f;
-        }
 
+
+            if(width > 50){
+                width -= 2.1f;
+                height -= 2.1f;
+            }
+        
     }
 }

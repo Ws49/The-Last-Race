@@ -41,7 +41,7 @@ public class Track {
             
             
             if(i > 750 && i < 850){
-                line.setY((float)Math.sin(i/30.0) * 1500);
+                //line.setY((float)Math.sin(i/30.0) * 1500);
             }
             if(i % 20 == 0){
                 line.setTexture( AssetsControl.getInstanceAssetsControl().getTexture("Building1"));
@@ -71,7 +71,7 @@ public class Track {
 
     public float resetTrack(float positionPlayer){
         while(positionPlayer > linesRoads.size() * segmentLentgh){
-            positionPlayer -=linesRoads.size() * segmentLentgh;
+            positionPlayer -= linesRoads.size() * segmentLentgh;
         }
 
         while(positionPlayer < 0){
@@ -105,7 +105,7 @@ public class Track {
             maxY = line.getDrawY();
  
             Color grass = ((i / 8) % 2) == 0 ? new Color(0,0.8f,0,1) : Color.GREEN;
-            Color rumble = ((i / 8) % 2) == 0 ? new Color(255,255,255,1) :  Color.RED;
+            Color rumble = ((i / 8) % 2) == 0 ? Color.GOLD : Color.GOLDENROD;
             Color divisor = ((i / 8) % 2) == 0 ? Color.WHITE : Color.BLACK;
             Color road = Color.BLACK;
             

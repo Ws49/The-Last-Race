@@ -5,21 +5,20 @@ package io.github.game.stages.Game.Vehicles.base;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
 import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
 
 public abstract class TransitVehicles extends Vehicles implements TransitParticipant{
 
-    private int positionInTrack = 0;
+
     private boolean postionValid;
     private boolean oldPositionValid;
     private boolean inScreen;
-
+    private boolean foiUltrapasado;
 
     public TransitVehicles(TypesVehicleTransit typeVehicle) {
-        super(500, 100, typeVehicle.getWidth(), typeVehicle.getHeight());
+        super(50, 100, typeVehicle.getWidth(), typeVehicle.getHeight());
 
         setColor(Color.WHITE);
 
@@ -33,6 +32,8 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
         oldPositionValid = false;
         inScreen = false;
        
+        foiUltrapasado = false;
+
         setMetersTraveled(0);
     }
 
@@ -40,44 +41,76 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
 
     public abstract void downSize();
 
-    public void nextPoint(float y, float x){
+    public void nextPoint(float coordY, float coordX){
 
-        if(oldPositionValid != postionValid){
-            if(y > 150){
-                width = 40;
-                height = 40;
-                posY = y;
-                System.out.println("HEY");
+        
+    
+        if(coordY < 290 && coordY > -100){
+            
+            //verifica se ta proximo
+            
+            if(oldPositionValid != postionValid){
+                if(coordY > 150){
+                    width = 40;
+                    height = 40;
+                    posY = coordY;
+                }
+
+                inScreen = true;
+            }else if(coordY > -100){
+                inScreen = true;
+                postionValid = true;
             }
-            inScreen = true;
-        }
 
-        if(postionValid){    
-            posX = x + 10;
-            if(posY < y){
+
+            if(postionValid){ 
+                if(coordX > 0){
+                    posX = coordX + 30;     
+                }else{
+                    posX--;
+                }
+
+                if(posY < coordY){
+                    foiUltrapasado = false;
+                    posY = coordY;
+                    downSize();
+                }else if(posY > coordY && coordY > 0){
+                    foiUltrapasado = true;
+                    posY--;
+                    upSize();
+                }
+                
+            }
+        }else if(foiUltrapasado){
+            if(posY >= -200){
+                posY-=9;
+                if(posY < 200){
+                    posX-= 9;
+                }
+              
+                upSize();
+            }
+        }else if(coordY > 680 && !foiUltrapasado){
+            if(posY <= 280){
                 posY ++;
                 downSize();
-            }else if(posY > y && y > 0){
-                posY -- ;
-                upSize();
-            }else if(posY > 0){
-                posY -- ;
-                upSize();
-            }else if(posY <= 0){
-                 postionValid = false;
             }
         }
 
-        oldPositionValid = postionValid;
-
-        if(postionValid == false){
-            inScreen = false;
+        if(posY > 280|| posY < -199){
+            setInScreen(false);
+            setpostionValid(false);
         }
+
+
+        System.out.println(coordY);
+        oldPositionValid = postionValid;
     }
 
     @Override
     public void update() {
-        metersTraveledUp(300);
+        metersTraveledUp(100);
+        
     }
     @Override
     public void draw(SpriteBatch batch){
@@ -97,12 +130,9 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
         this.postionValid = postionValid;
     }
 
-    public int getPositionInTrack() {
-        return positionInTrack;
-    }
+    
 
-    public void setPositionInTrack(int positionInTrack) {
-        this.positionInTrack = positionInTrack;
-    }
+
+
 
 }

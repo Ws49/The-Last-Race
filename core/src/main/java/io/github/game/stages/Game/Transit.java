@@ -15,6 +15,7 @@ public class Transit implements TransitParticipant{
     ArrayList<TransitParticipant> participants;
     ArrayList<LineRoad> wayTransit;
     private int  segmentLentgh;
+    
     public Transit(ArrayList<LineRoad> wayTransit, int segmentLentgh){
         participants = new ArrayList<TransitParticipant>();
         this.wayTransit = wayTransit;
@@ -32,35 +33,31 @@ public class Transit implements TransitParticipant{
     public int sizeTransit(){
         return participants.size();
     }
-
+    
+    //Atualiza o caminho dos participantes do trÂnsito (oponentes)
+    // informa a els onde eles devem ir
     public void  updateWay(){
         participants.forEach(participant ->{
             if(participant instanceof TransitVehicles){
 
                 int startPosition = (int)((TransitVehicles)participant).getMetersTraveled() /segmentLentgh;
-
-                if((int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200) < 385 && (int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200) > -100){
                     
                     int posY = (int)(((wayTransit.get(startPosition % wayTransit.size()).getDrawY() - 480) * -1)+ 200);
                     int posX = (int)((wayTransit.get(startPosition % wayTransit.size()).getDrawX() - wayTransit.get(startPosition % wayTransit.size()).getDrawW()) - 320);
-                    ((TransitVehicles)participant).nextPoint(posY,posX );
-                     ((TransitVehicles)participant).setpostionValid(true);
+                    ((TransitVehicles)participant).nextPoint(posY,posX);
+                    ((TransitVehicles)participant).setpostionValid(true);
 
-                }else{
-
-                    ((TransitVehicles)participant).setpostionValid(false);
-                    ((TransitVehicles)participant).setInScreen(false);
-
-                }
             }
 
         });
     }
-
+    // PSEUDO 3D AHAHAHHAAHAHHAHAHAHA
     @Override
     public void update() {   
+       
         participants.forEach(participant->{
             participant.update();
+            
         });
         updateWay();
     }

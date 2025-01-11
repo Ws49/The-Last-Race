@@ -10,9 +10,9 @@ public class Truck extends TransitVehicles {
 
     @Override
     public void upSize() {
-        if(width < 250){
-            width += 1.1f;
-            height += 1.1f;  
+        if(width < 230){
+            width += 3.1f;
+            height += 3.1f;  
         }
 
     }
@@ -20,8 +20,8 @@ public class Truck extends TransitVehicles {
     @Override
     public void downSize() {
         if(width > 50){
-            width -= 1.1f;
-            height -= 1.1f;
+            width -= 3.1f;
+            height -= 3.1f;
         }
 
     }

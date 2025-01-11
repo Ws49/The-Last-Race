@@ -42,9 +42,7 @@ public class PlayerVehicle extends Vehicles {
 
     @Override
     public void update() {
-        System.out.println(accelerate);
         // verifica se o x do player esta na grama e reduz velocidade
-
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             if (accelerate < 400) {
                 accelerate += 1;
@@ -98,4 +96,9 @@ public class PlayerVehicle extends Vehicles {
         }
 
     }
+
+    public int getAccelerate() {
+        return (int)((accelerate) * 0.55f);
+    }
+
 }
