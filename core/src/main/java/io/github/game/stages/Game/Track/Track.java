@@ -1,13 +1,14 @@
 package io.github.game.stages.Game.Track;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import io.github.game.AssetsControl.AssetsControl;
+
 import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
 
 public class Track {
@@ -42,9 +43,8 @@ public class Track {
                 line.setCurve(-0.7f);
             }
 
-            if (i % 80 == 0) {
-                line.setObjectRoad(
-                        new ObjectRoad(AssetsControl.getInstanceAssetsControl().getTexture("OutdorSega"), 50, 50));
+            if (i % 40 == 0) {
+                line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.CURVE, true));
                 line.setSpriteX(-2.5f);
             }
             linesRoads.add(line);

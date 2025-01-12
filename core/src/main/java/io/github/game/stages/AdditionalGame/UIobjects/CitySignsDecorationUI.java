@@ -34,7 +34,7 @@ public class CitySignsDecorationUI extends UIobject implements DrawableUI {
     }
     @Override
     public void update() {
-
+ 
     }
     @Override
     public int getX() {

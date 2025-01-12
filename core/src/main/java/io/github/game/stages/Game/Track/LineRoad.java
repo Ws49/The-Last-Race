@@ -1,5 +1,6 @@
 package io.github.game.stages.Game.Track;
 
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,14 +12,23 @@ class ObjectRoad{
     private float width;
     private float height;
     private Rectangle hitBox;
+    private boolean side;
+    private TypesObjectsRoad type;
 
-    public ObjectRoad(Texture texture, float width, float height){
-        this.textureObject = texture;
-        this.width = width;
-        this.height = height;
+
+    public ObjectRoad(TypesObjectsRoad type, boolean side){
+        this.type = type;
+        this.textureObject = type.getTexture();
+        this.width = type.getWidth();
+        this.height = type.getHeight();
         hitBox = new Rectangle();
+        this.side = side;
     }
     
+    public boolean getSide() {
+        return side;
+    }
+
     public Texture getTextureObject() {
         return textureObject;
     }
@@ -46,7 +56,7 @@ public class LineRoad {
     private float scale, curve,spriteX,clip;
 
     private ObjectRoad objectRoad;
-    private final int roadW=2000;
+    private final int roadW=4000;
     private float camD=0.84f;
     private int width=1600;
     private int height = 768;
@@ -68,11 +78,20 @@ public class LineRoad {
         float scaleDistance; 
         float posX;
 
-        scaleDistance  = 1.0f - (DrawY/ 280);
-        posX = (DrawX - (DrawW + 320) * scaleDistance) - 400;
+        if(objectRoad.getSide()){
+             scaleDistance  = 1.0f - (DrawY/ 280);
+             posX = (DrawX - (DrawW + 320) * scaleDistance) - 400;
+        }else{
+            scaleDistance  = (DrawY/ 280);
+            if(((DrawY- 480) * -1)+ 200 > 280){
+                posX = (DrawX - (DrawW * scaleDistance) + 320) - 700;
+            }else{
+                posX = (DrawX - (DrawW * scaleDistance) + 320) - 800;
+            }
+        }
 
         batch.draw(objectRoad.getTextureObject(), posX, (((DrawY- 480) * -1)+ 200),destW + objectRoad.getWidth() ,destH + objectRoad.getHeight());
-
+       System.out.println(((DrawY- 480) * -1)+ 200);
     }
 
 
@@ -90,8 +109,8 @@ public class LineRoad {
             sh.setColor(c);
             int [] xPoints = {x1-w1,x2-w2,x2+w2,x1+w1};
             int [] yPoints = {((y1 - 480) * -1) + 200,((y2 - 480) * -1) + 200,((y2 - 480) * -1) + 200,((y1 - 480) * -1) + 200};
-            sh.triangle(xPoints[0] - 320,yPoints[0],xPoints[1] - 320,yPoints[1],xPoints[2] - 320,yPoints[2]);
-            sh.triangle(xPoints[0] - 320,yPoints[0],xPoints[2] - 320,yPoints[2],xPoints[3] - 320,yPoints[3]);
+            sh.triangle(xPoints[0] - 300,yPoints[0],xPoints[1] - 300,yPoints[1],xPoints[2] - 300,yPoints[2]);
+            sh.triangle(xPoints[0] - 300,yPoints[0],xPoints[2] - 300,yPoints[2],xPoints[3] - 300,yPoints[3]);
     }
 
     public ObjectRoad getObjectRoad() {

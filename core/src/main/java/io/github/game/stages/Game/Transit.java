@@ -78,7 +78,7 @@ public class Transit implements TransitParticipant{
                 player.setCollision(false);
             }
         }
-
+        
         updateWay();
     }
 
