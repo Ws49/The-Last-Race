@@ -3,7 +3,7 @@ package io.github.game.stages.Game;
 import java.util.ArrayList;
 
 import io.github.game.stages.Game.InterfacesGame.ListenerFinalRace;
-
+//OBSERVER
 public class PublisherFinalRace {
     ArrayList<ListenerFinalRace> listenersCurve;
     float curve;

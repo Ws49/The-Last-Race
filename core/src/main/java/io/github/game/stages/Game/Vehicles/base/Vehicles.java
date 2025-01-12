@@ -17,7 +17,7 @@ public abstract class Vehicles {
     protected TextureRegion currentTRegion;
     protected float metersTraveled;
     protected int lineFrame;
-
+    protected int columnFrame;
     protected float width;
     protected float height;
     protected float posX;
@@ -25,7 +25,6 @@ public abstract class Vehicles {
     protected Color color;
     protected boolean isOneTexutre;
     protected Rectangle hitBox;
-
 
     public Vehicles(int posX,int posY,float width,float height){
        this.posX = posX;
@@ -35,12 +34,13 @@ public abstract class Vehicles {
        hitBox = new Rectangle();
        hitBox.width = width;
        hitBox.height =height;
+       columnFrame  = 0;
     }
 
     public void draw(SpriteBatch batch){
         if(isOneTexutre){
             batch.setColor(color);
-            batch.draw(textureRegions[lineFrame][0], posX, posY,width,height);
+            batch.draw(textureRegions[lineFrame][columnFrame], posX, posY,width,height);
             batch.setColor(Color.WHITE);  
         }else{
             this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);

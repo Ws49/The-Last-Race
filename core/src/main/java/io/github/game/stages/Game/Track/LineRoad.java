@@ -14,7 +14,8 @@ class ObjectRoad{
     private Rectangle hitBox;
     private boolean side;
     private TypesObjectsRoad type;
-
+    private float scaleDistance;
+    private float posX;
 
     public ObjectRoad(TypesObjectsRoad type, boolean side){
         this.type = type;
@@ -23,31 +24,65 @@ class ObjectRoad{
         this.height = type.getHeight();
         hitBox = new Rectangle();
         this.side = side;
-    }
-    
-    public boolean getSide() {
-        return side;
+        scaleDistance =0f;
+        posX = 0f;
     }
 
-    public Texture getTextureObject() {
-        return textureObject;
+    public void redimensionObject(float DrawX, float DrawW, float DrawY){
+        if(side){
+            if(type == TypesObjectsRoad.CURVE || type == TypesObjectsRoad.CURVE2){
+
+                scaleDistance  = 1.0f - (DrawY/ 280);
+                posX = (DrawX - (DrawW + 320) * scaleDistance) - 370;
+
+            }else{
+
+                scaleDistance  = 1.0f - (DrawY/ 280);
+                posX = (DrawX - (DrawW + 320) * scaleDistance) - 400;
+                
+            }
+        }else{
+            if(type == TypesObjectsRoad.CURVE ||type == TypesObjectsRoad.CURVE2){
+
+                scaleDistance  = (DrawY/ 280);
+                if(((DrawY- 480) * -1)+ 200 > 280){
+                    posX = (DrawX - (DrawW * scaleDistance) + 320) - 700;
+                }else{
+                    posX = (DrawX - (DrawW * scaleDistance) + 320) - 800;
+                }
+
+            }else{
+
+                scaleDistance  = (DrawY/ 280);
+                if(((DrawY- 480) * -1)+ 200 > 280){
+                    posX = (DrawX - (DrawW * scaleDistance) + 320) - 700;
+                }else{
+                    posX = (DrawX - (DrawW * scaleDistance) + 320) - 800;
+                }
+
+            }
+
+        }
     }
 
-    public float getWidth() {
-        return width;
+    public void draw(SpriteBatch batch, float DrawX, float DrawW, float DrawY){
+        int w = textureObject.getWidth();
+        int h = textureObject.getHeight();
+
+        float destW = w * DrawW / 266;
+        float destH = h * DrawW / 266;
+
+        if(type == TypesObjectsRoad.CURVE || type == TypesObjectsRoad.CURVE2){
+            batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 200),(int)(destW * 0.25 ),(int)(destH * 0.25));
+        }else{
+            batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 200),destW + width ,destH + height);
+        }
     }
-    public void setWidth(float width) {
-        this.width = width;
-    }
-    public float getHeight() {
-        return height;
-    }
-    public void setHeight(float height) {
-        this.height = height;
-    }
+
     public Rectangle getHitBox() {
         return hitBox;
     }
+
 }
 
 public class LineRoad {
@@ -67,31 +102,10 @@ public class LineRoad {
         spriteX=0;
         objectRoad = null;
     }
-
+    
     void drawSpriteRoad(SpriteBatch batch){
-        int w = objectRoad.getTextureObject().getWidth();
-        int h = objectRoad.getTextureObject().getHeight();
-
-        float destW = w * DrawW / 266;
-        float destH = h * DrawW / 266;
-
-        float scaleDistance; 
-        float posX;
-
-        if(objectRoad.getSide()){
-             scaleDistance  = 1.0f - (DrawY/ 280);
-             posX = (DrawX - (DrawW + 320) * scaleDistance) - 400;
-        }else{
-            scaleDistance  = (DrawY/ 280);
-            if(((DrawY- 480) * -1)+ 200 > 280){
-                posX = (DrawX - (DrawW * scaleDistance) + 320) - 700;
-            }else{
-                posX = (DrawX - (DrawW * scaleDistance) + 320) - 800;
-            }
-        }
-
-        batch.draw(objectRoad.getTextureObject(), posX, (((DrawY- 480) * -1)+ 200),destW + objectRoad.getWidth() ,destH + objectRoad.getHeight());
-       System.out.println(((DrawY- 480) * -1)+ 200);
+        objectRoad.redimensionObject(DrawX,DrawW,DrawY);
+        objectRoad.draw(batch, DrawX, DrawW, DrawY);
     }
 
 

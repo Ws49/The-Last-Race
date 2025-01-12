@@ -1,7 +1,7 @@
 package io.github.game.stages.Game.Track;
 
 import java.util.ArrayList;
-import java.util.Random;
+//import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
 
@@ -31,22 +31,47 @@ public class Track {
 
         this.playerVehicle = player;
 
-        for (int i = 0; i < 1600; i++) {
+        for (int i = 0; i < 5600; i++) {
             LineRoad line = new LineRoad();
             line.setZ((i * segmentLentgh));
 
-            if (i > 300 && i < 800) {
+            if (i > 300 && i < 1000) {
                 line.setCurve(0.5f);
+                if (i % 20 == 0) {
+                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.CURVE2, true));
+                    line.setSpriteX(-2.5f);
+                }
             }
 
-            if (i > 750 && i < 850) {
+            if (i > 1200 && i < 1850) {
                 line.setCurve(-0.7f);
+                if (i % 20 == 0) {
+                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.CURVE, false));
+                    line.setSpriteX(-2.5f);
+                }
             }
 
-            if (i % 40 == 0) {
-                line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.CURVE, true));
-                line.setSpriteX(-2.5f);
+            if(i > 2000 & i < 3500){
+                if (i % 40 == 0) {
+                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.TREE, false));
+                    line.setSpriteX(-2.5f);
+                }if (i % 50 == 0) {
+                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.PLANT, true));
+                    line.setSpriteX(-2.5f);
+                }
             }
+
+            if(i > 4000 && i < 4500){
+
+                if (i % 40 == 0) {
+                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.OUTDOOR_SEGA, true));
+                    line.setSpriteX(-2.5f);
+                }else if(i % 60 == 0) {
+                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.BAKERY, false));
+                    line.setSpriteX(-2.5f);
+                }
+            }
+
             linesRoads.add(line);
         }
 

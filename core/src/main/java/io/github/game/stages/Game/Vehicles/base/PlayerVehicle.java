@@ -16,15 +16,16 @@ public class PlayerVehicle extends Vehicles {
     private float valueCurve;
 
     public PlayerVehicle() {
-        super(400, 0, 250, 250);
+        super(370, 0, 300, 200);
         setColor(Color.WHITE);
-        durationAnimation = 0.01f;
-        textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Car", new Vector2(87, 60));
+        durationAnimation = 0f;
+        textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(70, 41));
         animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, durationAnimation);
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         accelerate = 0;
         verifySpeed = false;
         isCollision = false;
+        isOneTexutre = true;
     }
 
     public int getPlayerX() { 
@@ -45,6 +46,7 @@ public class PlayerVehicle extends Vehicles {
 
 
     public void speedUp(){
+        columnFrame = 0;
         if (accelerate < 600) {
             accelerate += 1;
             metersTraveledUp(accelerate);
@@ -107,6 +109,28 @@ public class PlayerVehicle extends Vehicles {
             }
         }
     }
+    
+    public void updateTexture(){
+        if(isOneTexutre){
+            switch (columnFrame) {
+                case 0:
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(70, 41));
+                    break;
+
+                case 1:
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(71, 41));
+                    break;
+
+                case 2:
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(74, 41));
+                    break;
+            
+                default:
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(70, 41));
+                    break;
+            }
+        }
+    }
 
     @Override
     public void update(){
@@ -115,10 +139,13 @@ public class PlayerVehicle extends Vehicles {
 
         updateMovimentInCurve();
 
+        updateTexture();
+
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             speedUp();
             speedDownOffRoad();
         } else {
+            columnFrame = 0;
             speedDown();
         }
 
@@ -132,6 +159,7 @@ public class PlayerVehicle extends Vehicles {
             if (playerX > -3200) {
                 updatePLayerX(-200);
             }
+            columnFrame = 1;
 
         }
 
@@ -139,6 +167,7 @@ public class PlayerVehicle extends Vehicles {
             if (playerX < 3200) {
                 updatePLayerX(200);
             }
+            columnFrame = 2;
 
         }
 
