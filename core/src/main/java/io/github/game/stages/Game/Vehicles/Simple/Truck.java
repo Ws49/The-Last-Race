@@ -9,19 +9,17 @@ public class Truck extends TransitVehicles {
     }
 
     @Override
-    public void upSize() {
-            if(width < 300){
-                width += 4.1f;
-                height += 4.1f; 
-            }   
-    }
+    public void updateSize(float widthRoad) {
+        int w = currentTRegion.getRegionWidth();
+        int h = currentTRegion.getRegionHeight();
 
-    @Override
-    public void downSize() {
-        if(width > 50){
-            width -= 3.1f;
-            height -= 3.1f;
+        float newWidth = w * widthRoad / 100;
+        float newHeight = h * widthRoad / 100;
+
+        if(newHeight < startWidth + 100){
+            width = newWidth;
+            height = newHeight;
         }
-
+        
     }
 }

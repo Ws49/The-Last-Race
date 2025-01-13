@@ -50,7 +50,7 @@ public class Level extends Stage {
         textureBackground = AssetsControl.getInstanceAssetsControl().getTexture("race1");
         drawablesUI = new BoxDrawablesUI();
         insertDrawablesUI();
-        //spawnVehicle();
+        spawnVehicle();
     }
 
     public void  insertDrawablesUI(){
@@ -113,7 +113,7 @@ public class Level extends Stage {
         drawablesUI.update();
 
         if (TimeUtils.millis() - lastVehicleTime > 5000) {
-           // spawnVehicle();
+           spawnVehicle();
             lastVehicleTime = TimeUtils.millis();
         }
 
@@ -133,8 +133,8 @@ public class Level extends Stage {
         sh.end();
         
         batch.begin();
-        track.drawObjedts(batch);
         playerVeicle.draw(batch);
+        track.drawObjedts(batch);
         transit.draw(batch);
         font.setColor(Color.BLACK);
         batch.end();

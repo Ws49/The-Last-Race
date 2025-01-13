@@ -9,25 +9,19 @@ public class PoliceCar extends TransitVehicles {
         super(type);
         posY = 80f;
     }
-
     @Override
-    public void upSize() {
-        if (width < 200) {
-            width += 2.8f;
-            height += 2.8f;
+    public void updateSize(float widthRoad) {
+        int w = currentTRegion.getRegionWidth();
+        int h = currentTRegion.getRegionHeight();
+
+        float newWidth = w * widthRoad / 100;
+        float newHeight = h * widthRoad / 100;
+
+        if(newHeight < startWidth ){
+            width = newWidth;
+            height = newHeight;
         }
-
-    }
-
-    @Override
-    public void downSize() {
-    
-            if (width > 50) {
-                width -= 2.8f;
-                height -= 2.8f;
-            }
         
-
     }
 
 }

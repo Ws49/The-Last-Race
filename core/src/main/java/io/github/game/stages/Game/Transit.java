@@ -56,7 +56,7 @@ public class Transit implements TransitParticipant{
                         posX = (int)((wayTransit.get(startPosition % wayTransit.size()).getDrawX() - wayTransit.get(startPosition % wayTransit.size()).getDrawW()) - 320);
                     }
         
-                    ((TransitVehicles)participant).nextPoint(posX,posY);
+                    ((TransitVehicles)participant).nextPoint(posX,posY,wayTransit.get(startPosition % wayTransit.size()).getDrawW());
                     ((TransitVehicles)participant).setpostionValid(true);
 
             }
@@ -95,12 +95,6 @@ public class Transit implements TransitParticipant{
             }
         });
 
-       // ShapeRenderer sh = new ShapeRenderer();
-       // sh.begin(ShapeType.Filled);
-      //  reversedParticipants.forEach(participant->{
-      //    sh.rect(((TransitVehicles)participant).getHitBox().x,((TransitVehicles)participant).getHitBox().y,((TransitVehicles)participant).getHitBox().width,((TransitVehicles)participant).getHitBox().height);
-       // });
-        //sh.end();
     }
 
     @Override

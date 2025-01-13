@@ -9,22 +9,17 @@ public class SimpleCar extends TransitVehicles{
     }
 
     @Override
-    public void upSize() {
-        if(width < 250){
-            width += 2.7f;
-            height += 2.7f;  
+    public void updateSize(float widthRoad) {
+        int w = currentTRegion.getRegionWidth();
+        int h = currentTRegion.getRegionHeight();
+
+        float newWidth = w * widthRoad / 150;
+        float newHeight = h * widthRoad / 150;
+
+        if(newHeight < startWidth){
+            width = newWidth;
+            height = newHeight;
         }
-
-    }
-
-    @Override
-    public void downSize() {
-
-
-            if(width > 50){
-                width -= 2.1f;
-                height -= 2.1f;
-            }
         
     }
 }

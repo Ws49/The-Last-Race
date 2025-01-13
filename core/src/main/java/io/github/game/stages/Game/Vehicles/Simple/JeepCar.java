@@ -10,22 +10,17 @@ public class JeepCar extends TransitVehicles {
     }
 
     @Override
-    public void upSize() {
-        if (width < 250) {
-            width += 2.1f;
-            height += 2.1f;
+    public void updateSize(float widthRoad) {
+        int w = currentTRegion.getRegionWidth();
+        int h = currentTRegion.getRegionHeight();
+
+        float newWidth = w * widthRoad / 100;
+        float newHeight = h * widthRoad / 100;
+
+        if(newHeight < startWidth + 100){
+            width = newWidth;
+            height = newHeight;
         }
-
-    }
-
-    @Override
-    public void downSize() {
-       
-            if (width > 50) {
-                width -=2.1f;
-                height -= 2.1f;
-            }
         
-
     }
 }

@@ -23,6 +23,7 @@ public class PlayerVehicle extends Vehicles {
         animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, durationAnimation);
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         accelerate = 0;
+        hitBox.setHeight(height);
         verifySpeed = false;
         isCollision = false;
         isOneTexutre = true;
@@ -101,11 +102,13 @@ public class PlayerVehicle extends Vehicles {
     }
 
     public void updateMovimentInCurve(){
-        if(playerX < 3200 && playerX > -3200){
-            if(valueCurve > 0){
-                updatePLayerX(-30);
-            }else if(valueCurve < 0){
-                updatePLayerX(30);
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            if(playerX < 3200 && playerX > -3200){
+                if(valueCurve > 0){
+                    updatePLayerX(-30);
+                }else if(valueCurve < 0){
+                    updatePLayerX(30);
+                }
             }
         }
     }
@@ -138,7 +141,6 @@ public class PlayerVehicle extends Vehicles {
         super.update();
 
         updateMovimentInCurve();
-
         updateTexture();
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
@@ -156,17 +158,17 @@ public class PlayerVehicle extends Vehicles {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            if (playerX > -3200) {
+            
                 updatePLayerX(-200);
-            }
+            
             columnFrame = 1;
 
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (playerX < 3200) {
+         
                 updatePLayerX(200);
-            }
+            
             columnFrame = 2;
 
         }

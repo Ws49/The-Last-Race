@@ -73,9 +73,9 @@ class ObjectRoad{
         float destH = h * DrawW / 266;
 
         if(type == TypesObjectsRoad.CURVE || type == TypesObjectsRoad.CURVE2){
-            batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 200),(int)(destW * 0.25 ),(int)(destH * 0.25));
+            batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 197),(int)(destW * 0.25 ),(int)(destH * 0.25));
         }else{
-            batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 200),destW + width ,destH + height);
+            batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 197),destW + width ,destH + height);
         }
     }
 
