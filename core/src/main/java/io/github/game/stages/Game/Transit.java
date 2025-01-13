@@ -42,6 +42,7 @@ public class Transit implements TransitParticipant{
     
     //Atualiza o caminho dos participantes do trÂnsito (oponentes)
     // informa a els aonde eles devem ir
+
     public void  updateWay(){
         participants.forEach(participant ->{
             if(participant instanceof TransitVehicles){
@@ -94,6 +95,8 @@ public class Transit implements TransitParticipant{
                 participant.draw(batch);
             }
         });
+
+
 
     }
 

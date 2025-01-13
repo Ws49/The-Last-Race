@@ -113,7 +113,7 @@ public class Level extends Stage {
         drawablesUI.update();
 
         if (TimeUtils.millis() - lastVehicleTime > 5000) {
-           spawnVehicle();
+           //spawnVehicle();
             lastVehicleTime = TimeUtils.millis();
         }
 

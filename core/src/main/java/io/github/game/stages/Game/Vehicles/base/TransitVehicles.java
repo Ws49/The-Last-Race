@@ -45,7 +45,7 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
         } else {
             posX = 50;
         }
-
+        hitBox.setSize(width + 50,height + 50);
         speed = new Random().nextInt(70, 400);
         startHeight = height;
         startWidth = width;
@@ -54,7 +54,7 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
 
     }
 
-    // recebbe a coordenada x e y da pista
+    // recebe a coordenada x e y da pista
 
     public void nextPoint(float coordX, float coordY, float withRoad) {
         goPoint(coordX, coordY, withRoad);
@@ -80,25 +80,27 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
             }
 
             if (postionValid) {
-                    if (rightRoad) {
-
+                if(coordX > 100){
+                    if (rightRoad) {                        
                         posX  = coordX - ((widthRoad / 280) / (coordX / 280)) * 300;
-    
-                        // posX = coordX - (((coordY - 280) * 15 + 20));
+                            // posX = coordX - (((coordY - 280) * 15 + 20));
                     } else {
-                        // posX = coordX + 30;
+                            // posX = coordX + 30;
+                            
                         posX = coordX + ((coordY / 280) * 10 + 30);
                     }
+                }
 
-                
+                System.out.println(coordX);
 
+                    
                 if (posY < coordY) {
                     wasSurpassed = false;
                     posY = coordY;
                 } else if (posY > coordY) {
                     wasSurpassed = true;
                     posY--;
-                }else if(coordY  < 0){
+                }else if(coordY < 0){
                     posY -= 24;
                 }
 
@@ -110,8 +112,6 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
             }
         }
     }
-
-    // ultrapassagem dos veiculos do transito em relacao ao player
 
     @Override
     public void update() {

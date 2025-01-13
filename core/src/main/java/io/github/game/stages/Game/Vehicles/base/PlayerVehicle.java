@@ -82,11 +82,11 @@ public class PlayerVehicle extends Vehicles {
                 verifySpeed = false;
             }
 
-            if (playerX <= -2600 && playerX >= -3200 && accelerate > 0 && verifySpeed) {
+            if (playerX <= -5400 && accelerate > 0 && verifySpeed) {
                 accelerate -= 3;
 
             }
-            if (playerX >= 2600 && playerX <= 3200 && accelerate > 0 && verifySpeed) {
+            if (playerX >= 5400 && accelerate > 0 && verifySpeed) {
                 accelerate -= 3;
             }
     }
@@ -137,7 +137,6 @@ public class PlayerVehicle extends Vehicles {
 
     @Override
     public void update(){
-        
         super.update();
 
         updateMovimentInCurve();
@@ -159,15 +158,20 @@ public class PlayerVehicle extends Vehicles {
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             
+            if(playerX >= -5600){
                 updatePLayerX(-200);
-            
+            }
+
             columnFrame = 1;
 
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
          
+         if(playerX <= 5600){
                 updatePLayerX(200);
+            }
+            
             
             columnFrame = 2;
 
