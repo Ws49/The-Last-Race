@@ -68,6 +68,7 @@ public class AssetsControl{
         assetManager.load("Bosses/Sarah.jpg",Texture.class);
         assetManager.load("Bosses/Ws.jpg",Texture.class);
         assetManager.load("Race/BackgroundRaces/back1.png", Texture.class);
+        assetManager.load("Race/BackgroundRaces/rio.png", Texture.class);
         assetManager.load("Race/Cenary/OutdoorSega.png", Texture.class);
         assetManager.load("Race/Cenary/OutdoorCamb.png", Texture.class);
         assetManager.load("Race/Cenary/Tree.png", Texture.class);
@@ -77,7 +78,10 @@ public class AssetsControl{
         assetManager.load("Race/Cenary/plant.png", Texture.class);
         assetManager.load("Race/Cenary/bakery.png", Texture.class);
         assetManager.load("Race/Cenary/stars.png", Texture.class);
-
+        assetManager.load("Race/Cenary/lineRace.png", Texture.class);
+        assetManager.load("Race/UI/velocimeter.png", Texture.class);
+        assetManager.load("Race/Cenary/lampost.png", Texture.class);
+        assetManager.load("Race/BackgroundRaces/city.jpg",Texture.class);
         assetManager.load("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class);
         assetManager.load("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class);
         assetManager.load("Musics/RXBØRN - REPENT [Christian Phonk].mp3",Music.class);
@@ -127,6 +131,8 @@ public class AssetsControl{
         textures.put("IconSarah",assetManager.get("Bosses/Sarah.jpg",Texture.class));
         textures.put("IconWs",assetManager.get("Bosses/Ws.jpg",Texture.class));
         textures.put("race1",assetManager.get("Race/BackgroundRaces/back1.png",Texture.class));
+        textures.put("race2",assetManager.get("Race/BackgroundRaces/rio.png",Texture.class));
+        textures.put("race3",assetManager.get("Race/BackgroundRaces/city.jpg",Texture.class));
         textures.put("OutdoorSega",assetManager.get("Race/Cenary/OutdoorSega.png", Texture.class));
         textures.put("OutdoorCamb",assetManager.get("Race/Cenary/OutdoorCamb.png", Texture.class));
         textures.put("Tree",assetManager.get("Race/Cenary/Tree.png", Texture.class));
@@ -135,6 +141,10 @@ public class AssetsControl{
         textures.put("Curve2",assetManager.get("Race/Cenary/curve2.png", Texture.class));
         textures.put("Plant",assetManager.get("Race/Cenary/plant.png", Texture.class));
         textures.put("Bakery",assetManager.get("Race/Cenary/bakery.png", Texture.class));
+        textures.put("Lamppost",assetManager.get("Race/Cenary/lampost.png", Texture.class));
+        textures.put("lineRace",assetManager.get("Race/Cenary/lineRace.png", Texture.class));
+        textures.put("velocimeterUI",assetManager.get("Race/UI/velocimeter.png", Texture.class));
+
         musics.put("Music1", assetManager.get("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class));
         musics.put("Music2", assetManager.get("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class));
         musics.put("Music3", assetManager.get("Musics/RXBØRN - REPENT [Christian Phonk].mp3",Music.class));

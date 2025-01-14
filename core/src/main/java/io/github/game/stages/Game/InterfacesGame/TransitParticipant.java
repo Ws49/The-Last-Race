@@ -8,4 +8,5 @@ public interface TransitParticipant {
     public void draw(SpriteBatch batch);
     public float getMetersTraveled();
     public Rectangle getColision();
+    public boolean isInScreen();
 }

@@ -35,12 +35,13 @@ class ObjectRoad{
                 scaleDistance  = 1.0f - (DrawY/ 280);
                 posX = (DrawX - (DrawW + 320) * scaleDistance) - 370;
 
+            }else if(type == TypesObjectsRoad.LINERACE){
+                posX = DrawX - DrawW - 300; 
             }else{
-
                 scaleDistance  = 1.0f - (DrawY/ 280);
-                posX = (DrawX - (DrawW + 320) * scaleDistance) - 400;
-                
+                posX = (DrawX - (DrawW + 320) * scaleDistance) - 400; 
             }
+            
         }else{
             if(type == TypesObjectsRoad.CURVE ||type == TypesObjectsRoad.CURVE2){
 
@@ -66,16 +67,34 @@ class ObjectRoad{
     }
 
     public void draw(SpriteBatch batch, float DrawX, float DrawW, float DrawY){
-        int w = textureObject.getWidth();
-        int h = textureObject.getHeight();
+        float destW; 
+        float destH; 
+        if(type == TypesObjectsRoad.LINERACE){
+            int w = textureObject.getWidth();
+            int h = textureObject.getHeight();
 
-        float destW = w * DrawW / 266;
-        float destH = h * DrawW / 266;
+            destW = w * DrawW / 140;
+            destH = h * DrawW / 140;
+        }else{
+            int w = textureObject.getWidth();
+            int h = textureObject.getHeight();
+
+            destW = w * DrawW / 266;
+            destH = h * DrawW / 266;
+        }
 
         if(type == TypesObjectsRoad.CURVE || type == TypesObjectsRoad.CURVE2){
+            
             batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 197),(int)(destW * 0.25 ),(int)(destH * 0.25));
+
+        }else if(type == TypesObjectsRoad.LINERACE){
+
+            batch.draw(textureObject,  posX, (((DrawY- 460) * -1)+ 197),destW+ width,destH + height);
+
         }else{
+
             batch.draw(textureObject, posX, (((DrawY- 480) * -1)+ 197),destW + width ,destH + height);
+
         }
     }
 

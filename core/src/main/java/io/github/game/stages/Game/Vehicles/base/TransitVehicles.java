@@ -18,7 +18,7 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
     private boolean rightRoad;
     protected float startWidth;
     protected float startHeight;
-    private int speed;
+    protected int speed;
 
     public abstract void updateSize(float widthRoad);
 
@@ -28,8 +28,7 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
         setColor(Color.WHITE);
 
         textureRegions = typeVehicle.getRegionTexture();
-        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, typeVehicle.getLineFrame(),
-                typeVehicle.getDurationAnimation());
+        animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, typeVehicle.getLineFrame(),typeVehicle.getDurationAnimation());
         currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         lineFrame = typeVehicle.getLineFrame();
         isOneTexutre = true;
@@ -45,26 +44,20 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
         } else {
             posX = 50;
         }
-        hitBox.setSize(width + 50,height + 50);
-        speed = new Random().nextInt(70, 400);
+
         startHeight = height;
         startWidth = width;
-
-        setMetersTraveled(0);
-
     }
 
     // recebe a coordenada x e y da pista
 
     public void nextPoint(float coordX, float coordY, float withRoad) {
         goPoint(coordX, coordY, withRoad);
-
-
         updateSize(withRoad);
 
     }
 
-    public void goPoint(float coordX, float coordY,float widthRoad) {
+    private void goPoint(float coordX, float coordY,float widthRoad) {
 
         if (coordY < 290 ) {
             // verifica se ta proximo
@@ -77,23 +70,25 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
                     inScreen = true;
                     postionValid = true;
                 }
+            }else{
+                postionValid = false;
+                inScreen = false;
             }
 
             if (postionValid) {
-                if(coordX > 100){
-                    if (rightRoad) {                        
-                        posX  = coordX - ((widthRoad / 280) / (coordX / 280)) * 300;
+   
+                    if (rightRoad) {  
+                            posX  = coordX - ((widthRoad / 280) / (coordX / 280)) * 300;
+                
+                          
+         
                             // posX = coordX - (((coordY - 280) * 15 + 20));
-                    } else {
+                         } else {
                             // posX = coordX + 30;
-                            
-                        posX = coordX + ((coordY / 280) * 10 + 30);
+                 
+                          posX = coordX + ((coordY / 280) * 10 + 30);
                     }
-                }
-
-                System.out.println(coordX);
-
-                    
+            
                 if (posY < coordY) {
                     wasSurpassed = false;
                     posY = coordY;
@@ -111,12 +106,13 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
                 posY++;
             }
         }
+
     }
 
     @Override
     public void update() {
-        super.update();
-
+        hitBox.x = posX;
+        hitBox.y = posY;
         if (!inScreen) {
             hitBox.setY(-1000);
             hitBox.setX(-1000);
@@ -129,7 +125,7 @@ public abstract class TransitVehicles extends Vehicles implements TransitPartici
     public void draw(SpriteBatch batch) {
         super.draw(batch);
     }
-
+    @Override
     public boolean isInScreen() {
         return inScreen;
     }

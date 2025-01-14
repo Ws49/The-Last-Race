@@ -1,8 +1,13 @@
 package io.github.game.stages.Game.Vehicles.base;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import io.github.game.AssetsControl.AssetsControl;
@@ -14,6 +19,10 @@ public class PlayerVehicle extends Vehicles {
     private boolean verifySpeed;
     private boolean isCollision;
     private float valueCurve;
+    private Texture velocimeter;
+    private BitmapFont fontSpeed;
+    private BitmapFont fontPosition;
+    private int position;
 
     public PlayerVehicle() {
         super(370, 0, 300, 200);
@@ -22,31 +31,31 @@ public class PlayerVehicle extends Vehicles {
         textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(70, 41));
         animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, durationAnimation);
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
+        fontSpeed = AssetsControl.getInstanceAssetsControl().getFont("Font/Pixel.ttf", 24);
+        fontPosition = AssetsControl.getInstanceAssetsControl().getFont("Font/Pixel.ttf", 84);
+        velocimeter = AssetsControl.getInstanceAssetsControl().getTexture("velocimeterUI");
         accelerate = 0;
-        hitBox.setHeight(height);
+        hitBox.setWidth(width / 2);
+        position = 0;
         verifySpeed = false;
         isCollision = false;
         isOneTexutre = true;
-    }
-
-    public int getPlayerX() { 
-        return playerX;
-    }
-
-    public void updatePLayerX(int playerX) {
-        this.playerX += playerX;
 
     }
 
-    public void brake() {
-        if (accelerate > 0) {
-            accelerate -= 2;
-            metersTraveledUp(accelerate);
-        }
+
+    @Override
+    public void draw(SpriteBatch batch) {
+        super.draw(batch);
+        batch.draw(velocimeter, 730, -50, 350, 350);
+        fontSpeed.setColor(Color.CYAN);
+        fontPosition.setColor(Color.BLUE);
+        fontSpeed.draw(batch,  String.valueOf(getAccelerate()), 860, 130);
+        fontPosition.draw(batch, String.valueOf(position),800, 650);
+        fontSpeed.draw(batch,  "ST", 900, 600);
     }
 
-
-    public void speedUp(){
+    private void speedUp() {
         columnFrame = 0;
         if (accelerate < 600) {
             accelerate += 1;
@@ -55,89 +64,124 @@ public class PlayerVehicle extends Vehicles {
             accelerate = 600;
             metersTraveledUp(accelerate);
         }
-        if(accelerate < 0){
+        if (accelerate < 0) {
             accelerate += 5;
             metersTraveledUp(accelerate);
         }
     }
+    
 
-    public void speedDown(){
+    private void speedDown() {
         if (accelerate > 0) {
             accelerate -= 2;
             metersTraveledUp(accelerate);
         }
-        if(accelerate < 0){
+        if (accelerate < 0) {
             accelerate += 5;
             metersTraveledUp(accelerate);
         }
-
     }
-    
+
+
     // verifica se o x do player esta na grama e reduz velocidade
-    public void speedDownOffRoad(){
+    private void speedDownOffRoad() {
+
+        if (accelerate >= 150 && accelerate <= 600) {
+            verifySpeed = true;
+        } else {
+            verifySpeed = false;
+        }
+
+        if (playerX <= -5400 && accelerate > 0 && verifySpeed) {
+            accelerate -= 3;
+
+        }
+        if (playerX >= 5400 && accelerate > 0 && verifySpeed) {
+            accelerate -= 3;
+        }
+    }
+
+    private void moveToBack() {
+        if(getMetersTraveled() / 200 > 0){
+            if (accelerate > -300) {
+                accelerate -= 30;
+            } else {
+                accelerate = 0;
+            }
+            metersTraveledUp(accelerate);
+        }
         
-        if(accelerate >= 150 && accelerate <= 600){
-                verifySpeed = true;
-            }else{
-                verifySpeed = false;
-            }
+    }
 
-            if (playerX <= -5400 && accelerate > 0 && verifySpeed) {
-                accelerate -= 3;
-
-            }
-            if (playerX >= 5400 && accelerate > 0 && verifySpeed) {
-                accelerate -= 3;
-            }
+    private void brake() {
+        if (accelerate > 0) {
+            accelerate -= 2;
+            metersTraveledUp(accelerate);
+        }
     }
     
+    private void updatePLayerX(int playerX) {
+        this.playerX += playerX;
 
-    public void moveToBack(){
-        if(accelerate > -300){
-            accelerate -= 30;
-        }else{
-            accelerate = 0;
-        }
-        metersTraveledUp(accelerate);
     }
 
-    public void updateMovimentInCurve(){
+    private void updateMovimentInCurve() {
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if(playerX < 3200 && playerX > -3200){
-                if(valueCurve > 0){
-                    updatePLayerX(-30);
-                }else if(valueCurve < 0){
-                    updatePLayerX(30);
+            if (playerX < 5600 && playerX > -5600) {
+                if (valueCurve > 0) {
+                    updatePLayerX(-70);
+                } else if (valueCurve < 0) {
+                    updatePLayerX(70);
                 }
             }
         }
     }
-    
-    public void updateTexture(){
-        if(isOneTexutre){
+
+    private void updateTexture() {
+        if (isOneTexutre) {
             switch (columnFrame) {
                 case 0:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(70, 41));
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
+                            new Vector2(70, 41));
                     break;
 
                 case 1:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(71, 41));
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
+                            new Vector2(71, 41));
                     break;
 
                 case 2:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(74, 41));
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
+                            new Vector2(74, 41));
                     break;
-            
+
                 default:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(70, 41));
+                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
+                            new Vector2(70, 41));
                     break;
             }
         }
     }
 
+    public void updatePosition(ArrayList<Float> metersTraveledOpponents){
+        int positionAux = metersTraveledOpponents.size();
+        for (Float metersOpponent : metersTraveledOpponents) {
+            if(getMetersTraveled() - metersOpponent > 0){
+                positionAux--;
+            }else{
+                positionAux++;
+            }
+        }
+    
+        position = (positionAux + 2)/ 2;
+       
+    }
+    
     @Override
-    public void update(){
-        super.update();
+    public void update() {
+
+        hitBox.x = posX + (width / 4);
+        hitBox.y = posY + 54;
 
         updateMovimentInCurve();
         updateTexture();
@@ -157,8 +201,8 @@ public class PlayerVehicle extends Vehicles {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            
-            if(playerX >= -5600){
+
+            if (playerX >= -5600) {
                 updatePLayerX(-200);
             }
 
@@ -167,22 +211,23 @@ public class PlayerVehicle extends Vehicles {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-         
-         if(playerX <= 5600){
+
+            if (playerX <= 5600) {
                 updatePLayerX(200);
             }
-            
-            
+
             columnFrame = 2;
 
         }
 
-        if(isCollision == true){
+        if (isCollision == true) {
             moveToBack();
         }
-
     }
 
+    public int getPlayerX() {
+        return playerX;
+    }
     public void setValueCurve(float valueCurve) {
         this.valueCurve = valueCurve;
     }
@@ -196,7 +241,7 @@ public class PlayerVehicle extends Vehicles {
     }
 
     public int getAccelerate() {
-        return (int)((accelerate) * 0.55f);
+        return (int) ((accelerate) * 0.25f);
     }
 
 }

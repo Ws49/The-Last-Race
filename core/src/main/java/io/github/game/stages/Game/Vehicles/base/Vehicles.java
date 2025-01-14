@@ -50,10 +50,7 @@ public abstract class Vehicles {
         }
     }
     
-    public void update(){
-        hitBox.x = posX;
-        hitBox.y = posY;
-    };
+    public abstract void update();
     
     public Color getColor() {
         return color;

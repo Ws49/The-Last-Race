@@ -86,4 +86,8 @@ public class BoxDrawablesUI implements DrawableUI{
         return x;
     }
 
+    public int size(){
+        return drawables.size();
+    }
+
 }

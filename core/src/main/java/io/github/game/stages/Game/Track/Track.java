@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-
+import io.github.game.stages.Game.Levels.PublisherFinalRace;
 import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
 
 public class Track {
@@ -23,57 +23,15 @@ public class Track {
     private int verticeDrawW2;
 
     private PlayerVehicle playerVehicle;
+    private PublisherFinalRace publisherFinalRace;
 
-    public Track(int segmentLentgh, PlayerVehicle player) {
+    public Track(PlayerVehicle player, int typeTrack, PublisherFinalRace publisherFinalRace) {
         linesRoads = new ArrayList<LineRoad>();
 
-        this.segmentLentgh = segmentLentgh;
-
+        this.segmentLentgh = 200;
+        this.publisherFinalRace = publisherFinalRace;
         this.playerVehicle = player;
-
-        for (int i = 0; i < 5600; i++) {
-            LineRoad line = new LineRoad();
-            line.setZ((i * segmentLentgh));
-
-            if (i > 300 && i < 1000) {
-                line.setCurve(0.5f);
-                if (i % 20 == 0) {
-                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.CURVE2, true));
-                    line.setSpriteX(-2.5f);
-                }
-            }
-
-            if (i > 1200 && i < 1850) {
-                line.setCurve(-0.7f);
-                if (i % 20 == 0) {
-                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.CURVE, false));
-                    line.setSpriteX(-2.5f);
-                }
-            }
-
-            if(i > 2000 & i < 3500){
-                if (i % 40 == 0) {
-                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.TREE, false));
-                    line.setSpriteX(-2.5f);
-                }if (i % 50 == 0) {
-                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.PLANT, true));
-                    line.setSpriteX(-2.5f);
-                }
-            }
-
-            if(i > 4000 && i < 4500){
-
-                if (i % 40 == 0) {
-                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.OUTDOOR_SEGA, true));
-                    line.setSpriteX(-2.5f);
-                }else if(i % 60 == 0) {
-                    line.setObjectRoad(new ObjectRoad(TypesObjectsRoad.BAKERY, false));
-                    line.setSpriteX(-2.5f);
-                }
-            }
-
-            linesRoads.add(line);
-        }
+        linesRoads = FactoryRoad.getRoad(typeTrack, segmentLentgh);
 
         this.verticeDrawW1 = 0;
         this.verticeDrawX1 = 0;
@@ -95,7 +53,7 @@ public class Track {
         }
     }
 
-    public float resetTrack(float positionPlayer) {
+    private float resetTrack(float positionPlayer) {
         while (positionPlayer > linesRoads.size() * segmentLentgh) {
             positionPlayer -= linesRoads.size() * segmentLentgh;
         }
@@ -115,6 +73,9 @@ public class Track {
         int camH = (int) (1500 + linesRoads.get(startPosition).getY());
         float maxY = 768;
 
+        if(startPosition > linesRoads.size() - 200){
+            publisherFinalRace.setFinishedRace(true);
+        }
         for (int i = startPosition; i < startPosition + 300; i++) {
 
             LineRoad line = linesRoads.get(i % linesRoads.size());

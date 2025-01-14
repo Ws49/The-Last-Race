@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import io.github.game.AssetsControl.AssetsControl;
 
-public enum TypesObjectsRoad {
+enum TypesObjectsRoad {
     OUTDOOR_SEGA(AssetsControl.getInstanceAssetsControl().getTexture("OutdoorSega"), 50, 50),
     OUTDOOR_CAMB(AssetsControl.getInstanceAssetsControl().getTexture("OutdoorCamb"), 50, 50),
     TREE(AssetsControl.getInstanceAssetsControl().getTexture("Tree"), 50, 50),
@@ -12,7 +12,9 @@ public enum TypesObjectsRoad {
     CURVE(AssetsControl.getInstanceAssetsControl().getTexture("Curve"), 0,0),
     CURVE2(AssetsControl.getInstanceAssetsControl().getTexture("Curve2"), 0,0),
     PLANT(AssetsControl.getInstanceAssetsControl().getTexture("Plant"), 50, 50),
-    BAKERY(AssetsControl.getInstanceAssetsControl().getTexture("Bakery"), 50, 50);
+    BAKERY(AssetsControl.getInstanceAssetsControl().getTexture("Bakery"), 50, 50),
+    LINERACE(AssetsControl.getInstanceAssetsControl().getTexture("lineRace"), 80, 150),
+    LAMPPOST(AssetsControl.getInstanceAssetsControl().getTexture("Lamppost"), 50, 50);
     //TREE();
     private Texture texture;
     private int width;
