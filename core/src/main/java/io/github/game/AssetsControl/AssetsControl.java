@@ -36,6 +36,8 @@ public class AssetsControl{
         assetManager.load("Cars/TraficCars.png", Texture.class);
         assetManager.load("Cars/TraficCars2.png", Texture.class);
         assetManager.load("Cars/buggati.png", Texture.class);
+        assetManager.load("Cars/LamborghiniDiablo.png", Texture.class);
+        assetManager.load("Cars/LamborghiniRed.png", Texture.class);
         assetManager.load("backgrounds/background.jpg",Texture.class);
         assetManager.load("UI/Buttons/button.png",Texture.class);
         assetManager.load("UI/Buttons/buttonQuit.png",Texture.class);
@@ -50,6 +52,8 @@ public class AssetsControl{
         assetManager.load("UI/Buttons/buttonShop.png",Texture.class);
         assetManager.load("UI/Buttons/buttonCredits.png",Texture.class);
         assetManager.load("UI/Buttons/buttonMainMenu.png",Texture.class);
+        assetManager.load("UI/Buttons/arrow.png",Texture.class);
+        assetManager.load("UI/Buttons/arrow2.png",Texture.class);
         assetManager.load("UI/Building/1.png",Texture.class);
         assetManager.load("UI/Building/2.png",Texture.class);
         assetManager.load("UI/Building/3.png",Texture.class);
@@ -63,6 +67,7 @@ public class AssetsControl{
         assetManager.load("UI/CityNeon/Sign 17/pink.png",Texture.class);
         assetManager.load("UI/CityNeon/Sign 14/pink.png",Texture.class);
         assetManager.load("UI/CityNeon/Sign 19/cyan.png",Texture.class);
+        assetManager.load("UI/Shop/blocked.png",Texture.class);
         assetManager.load("backgrounds/backgroundMenu.png",Texture.class);
         assetManager.load("Bosses/Ice.jpg",Texture.class);
         assetManager.load("Bosses/Sarah.jpg",Texture.class);
@@ -83,12 +88,7 @@ public class AssetsControl{
         assetManager.load("Race/Cenary/lampost.png", Texture.class);
         assetManager.load("Race/BackgroundRaces/city.jpg",Texture.class);
         assetManager.load("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class);
-        assetManager.load("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class);
-        assetManager.load("Musics/RXBØRN - REPENT [Christian Phonk].mp3",Music.class);
-        assetManager.load("Musics/LOST LAND.mp3",Music.class);
-        assetManager.load("Musics/JESUS ARMOR.mp3",Music.class);
-        assetManager.load("Musics/JayXTurbo - REDEEM (w X-Ray) (CHRISTIAN PHONK).mp3",Music.class);
-
+   
         assetManager.load("Sounds/glitch.mp3",Sound.class);
 
         assetManager.finishLoading();
@@ -96,6 +96,8 @@ public class AssetsControl{
         textures.put("Car", assetManager.get("Car.png", Texture.class));
         textures.put("OutrunCars", assetManager.get("Cars/OutrunCars.png", Texture.class));        
         textures.put("Buggati", assetManager.get("Cars/buggati.png", Texture.class));        
+        textures.put("Lamborghini", assetManager.get("Cars/LamborghiniDiablo.png", Texture.class));
+        textures.put("LamborghiniRed", assetManager.get("Cars/LamborghiniRed.png", Texture.class));
         textures.put("TraficCars", assetManager.get("Cars/TraficCars.png", Texture.class));        
         textures.put("TraficCars2", assetManager.get("Cars/TraficCars2.png", Texture.class));        
         textures.put("BackgroundStart", assetManager.get("backgrounds/background.jpg", Texture.class));
@@ -108,6 +110,8 @@ public class AssetsControl{
         textures.put("ButtonShop", assetManager.get("UI/Buttons/buttonShop.png", Texture.class));
         textures.put("ButtonCredits", assetManager.get("UI/Buttons/buttonCredits.png", Texture.class));
         textures.put("ButtonMainMenu", assetManager.get("UI/Buttons/buttonMainMenu.png", Texture.class));
+        textures.put("ButtonRight", assetManager.get("UI/Buttons/arrow.png", Texture.class));
+        textures.put("ButtonLeft", assetManager.get("UI/Buttons/arrow2.png", Texture.class));
         textures.put("Building1", assetManager.get("UI/Building/1.png",Texture.class));
         textures.put("Building2", assetManager.get("UI/Building/2.png",Texture.class));
         textures.put("Building3", assetManager.get("UI/Building/3.png",Texture.class));
@@ -122,6 +126,7 @@ public class AssetsControl{
         textures.put("ElementyCity5", assetManager.get("UI/CityNeon/Sign 17/pink.png",Texture.class));
         textures.put("ElementyCity6", assetManager.get("UI/CityNeon/Sign 14/pink.png",Texture.class));
         textures.put("ElementyCity7", assetManager.get("UI/CityNeon/Sign 19/cyan.png",Texture.class));
+        textures.put("Blocked", assetManager.get("UI/Shop/blocked.png",Texture.class));
         textures.put("Stars", assetManager.get("Race/Cenary/stars.png",Texture.class));
         textures.put("BarVolume",assetManager.get("UI/Buttons/bar.png",Texture.class));
         textures.put("Sfx",assetManager.get("UI/Buttons/sfx.png",Texture.class));
@@ -146,11 +151,7 @@ public class AssetsControl{
         textures.put("velocimeterUI",assetManager.get("Race/UI/velocimeter.png", Texture.class));
 
         musics.put("Music1", assetManager.get("Musics/my!lane - This Feeling (Instrumental).mp3",Music.class));
-        musics.put("Music2", assetManager.get("Musics/Pastel Ghost - Embrace Instrumental.mp3",Music.class));
-        musics.put("Music3", assetManager.get("Musics/RXBØRN - REPENT [Christian Phonk].mp3",Music.class));
-        musics.put("Music4", assetManager.get("Musics/LOST LAND.mp3",Music.class));
-        musics.put("Music5", assetManager.get("Musics/JESUS ARMOR.mp3",Music.class));
-        musics.put("Music6", assetManager.get("Musics/JayXTurbo - REDEEM (w X-Ray) (CHRISTIAN PHONK).mp3",Music.class));
+      
 
         sounds.put("Sound1",assetManager.get("Sounds/glitch.mp3",Sound.class));
 

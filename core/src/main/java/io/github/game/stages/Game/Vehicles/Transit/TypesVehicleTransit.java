@@ -1,4 +1,4 @@
-package io.github.game.stages.Game.Vehicles.Types;
+package io.github.game.stages.Game.Vehicles.Transit;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +14,8 @@ public enum TypesVehicleTransit {
     CAR_PINK(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars2", new Vector2(125,82)),150,100,3,0f),
     CAR_GREEN(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars2", new Vector2(115,78)),250,200,2,0f),
 
-    FERRARI(AssetsControl.getInstanceAssetsControl().getTextureRegions("OutrunCars", new Vector2(64, 64)),250,250,0,0f);
+    FERRARI(AssetsControl.getInstanceAssetsControl().getTextureRegions("OutrunCars", new Vector2(64, 64)),250,250,0,0f),
+    PORSHE(AssetsControl.getInstanceAssetsControl().getTextureRegions("TraficCars", new Vector2(78,54)),200,200,1,0f);
 
     private float durationAnimation;
 

@@ -1,17 +1,12 @@
-package io.github.game.stages.Game.Vehicles.Opponents;
+package io.github.game.stages.Game.Vehicles.Transit;
 
 import java.util.Random;
 
-import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
-import io.github.game.stages.Game.Vehicles.base.TransitVehicles;
-
-public class Opponent extends TransitVehicles {
-
-    public Opponent(TypesVehicleTransit type,int maxSpeed) {
+class Truck extends TransitVehicles {
+    public Truck(TypesVehicleTransit type){
         super(type);
-        posY = 80f;
-        setMetersTraveled(100);
-        speed = new Random().nextInt(100, maxSpeed);
+        setMetersTraveled(new Random().nextInt(0,100000));
+        speed = new Random().nextInt(70, 400);
     }
 
     @Override
@@ -28,5 +23,4 @@ public class Opponent extends TransitVehicles {
         }
         
     }
-    
 }

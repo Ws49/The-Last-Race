@@ -14,8 +14,9 @@ public enum TypesButtonUI {
     CONTINUE(AssetsControl.getInstanceAssetsControl().getTexture("ButtonContinue"), 400,120),
     SHOP(AssetsControl.getInstanceAssetsControl().getTexture("ButtonShop"), 400,120),
     CREDITS(AssetsControl.getInstanceAssetsControl().getTexture("ButtonCredits"), 400,120),
-    MAINMENU(AssetsControl.getInstanceAssetsControl().getTexture("ButtonMainMenu"), 400,120);
-
+    MAINMENU(AssetsControl.getInstanceAssetsControl().getTexture("ButtonMainMenu"), 400,120),
+    LEFT(AssetsControl.getInstanceAssetsControl().getTexture("ButtonLeft"),200,120),
+    RIGHT(AssetsControl.getInstanceAssetsControl().getTexture("ButtonRight"),200,120);
     private Texture textureButton;
     private float height;
     private float width;

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import io.github.game.stages.Game.Levels.PublisherFinalRace;
-import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
+import io.github.game.stages.Game.Vehicles.Player.PlayerVehicle;
 
 public class Track {
     private ArrayList<LineRoad> linesRoads;

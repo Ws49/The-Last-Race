@@ -16,12 +16,14 @@ import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.Screens.GameScreen;
 import io.github.game.stages.AdditionalGame.Options;
 import io.github.game.stages.AdditionalGame.UIobjects.BoxDrawablesUI;
+import io.github.game.stages.Game.SaveData;
 import io.github.game.stages.Game.InterfacesGame.ListennerFinalRace;
 import io.github.game.stages.Game.Track.Track;
-import io.github.game.stages.Game.Vehicles.FactoryVehiclesTransit;
-import io.github.game.stages.Game.Vehicles.Transit;
-import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
-import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
+import io.github.game.stages.Game.Vehicles.Player.PlayerVehicle;
+import io.github.game.stages.Game.Vehicles.Transit.FactoryVehiclesTransit;
+import io.github.game.stages.Game.Vehicles.Transit.Transit;
+import io.github.game.stages.Game.Vehicles.Transit.TypesVehicleTransit;
+
 
 
 
@@ -30,7 +32,6 @@ abstract class Level extends Stage implements ListennerFinalRace {
 
     private ShapeRenderer sh;
     protected SpriteBatch batch;
-
     private Track track;
     protected PlayerVehicle playerVeicle;
     protected Transit transit; 
@@ -41,23 +42,25 @@ abstract class Level extends Stage implements ListennerFinalRace {
     protected PublisherFinalRace publisherFinalRace;
     private FinishGame finishGameView;
     private Screen contextMainGame;
+    private int typelevel;
 
-    public Level(int typeLevel,Screen context,PlayerVehicle player) {
-
-        playerVeicle = new PlayerVehicle();
+    public Level(int typeLevel,Screen context, PlayerVehicle player) {
         sh = new ShapeRenderer();
         batch = new SpriteBatch();
+        this.playerVeicle = player;
         contextMainGame = context;
         publisherFinalRace = new PublisherFinalRace();
         publisherFinalRace.addListener(this);
         track = new Track(playerVeicle,typeLevel,publisherFinalRace);
         transit = new Transit(track.toWay(),playerVeicle); 
-
+        playerVeicle.setMetersTraveled(0);
+        player.setAccelerate(0);
         drawablesUI = new BoxDrawablesUI();
 
         finalGame = false;
         finishGameView = new FinishGame();
-
+        this.typelevel = typeLevel;
+        
         spawnVehicle();
         setListenerButtons();
     }
@@ -112,16 +115,18 @@ abstract class Level extends Stage implements ListennerFinalRace {
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        
         AssetsControl.getInstanceAssetsControl().update(delta);
         if(!finalGame){
             playerVeicle.update();
             playerVeicle.updatePosition(transit.getPositionOpponents());
             transit.update();
-            if (TimeUtils.millis() - lastVehicleTime > 5000) {
+            if (TimeUtils.millis() - lastVehicleTime > 3000) {
                 spawnVehicle();
                 lastVehicleTime = TimeUtils.millis();
             }
+        }else{
+            SaveData.instance().Save(typelevel, playerVeicle.getPosition());
         }
 
         drawablesUI.update();
@@ -149,7 +154,12 @@ abstract class Level extends Stage implements ListennerFinalRace {
         playerVeicle.draw(batch);
 
         if(finalGame){
-            finishGameView.draw(batch);  
+            if(playerVeicle.getPosition() == 1){
+                finishGameView.draw(batch,true);  
+            }else{
+                finishGameView.draw(batch,false);
+            }
+            
         }
         batch.end();
 

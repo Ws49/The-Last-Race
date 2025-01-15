@@ -1,4 +1,4 @@
-package io.github.game.stages.Game.Vehicles;
+package io.github.game.stages.Game.Vehicles.Transit;
 
 //COMPOSITE
 
@@ -10,9 +10,8 @@ import com.badlogic.gdx.math.Rectangle;
 
 import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
 import io.github.game.stages.Game.Track.LineRoad;
-import io.github.game.stages.Game.Vehicles.Opponents.Opponent;
-import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
-import io.github.game.stages.Game.Vehicles.base.TransitVehicles;
+import io.github.game.stages.Game.Vehicles.Player.PlayerVehicle;
+
 
 public class Transit implements TransitParticipant{
     ArrayList<TransitParticipant> participants;
@@ -88,7 +87,7 @@ public class Transit implements TransitParticipant{
         });
 
         for (TransitParticipant transitParticipant : participants) {
-            if(transitParticipant.getColision().overlaps(player.getHitBox())){
+            if(transitParticipant.getColision().overlaps(player.getHitBox()) && player.getMetersTraveled() > 1000){
                 player.setCollision(true);
                 break;
             }else{
@@ -137,6 +136,4 @@ public class Transit implements TransitParticipant{
         return false;
     }
     
-
-
 }

@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import io.github.game.AssetsControl.AssetsControl;
 
 public abstract class Vehicles {
-    Animation<TextureRegion> animation;
+    protected Animation<TextureRegion> animation;
     protected TextureRegion[][] textureRegions;
     protected TextureRegion currentTRegion;
     protected float metersTraveled;

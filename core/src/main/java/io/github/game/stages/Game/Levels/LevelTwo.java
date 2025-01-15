@@ -4,17 +4,20 @@ package io.github.game.stages.Game.Levels;
 import com.badlogic.gdx.Screen;
 
 import io.github.game.AssetsControl.AssetsControl;
-import io.github.game.stages.Game.Vehicles.Opponents.Opponent;
-import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
-import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
+import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
+import io.github.game.stages.Game.Vehicles.Player.PlayerVehicle;
+import io.github.game.stages.Game.Vehicles.Transit.FactoryOpponent;
+import io.github.game.stages.Game.Vehicles.Transit.TypesVehicleTransit;
 
-public class LevelTwo extends Level {
-    public LevelTwo(Screen context){ 
-        super(2,context,new PlayerVehicle());
+class LevelTwo extends Level {
+    public LevelTwo(Screen context, PlayerVehicle player){ 
+        super(2,context,player);
         textureBackground = AssetsControl.getInstanceAssetsControl().getTexture("race2");
         spawnVehicle();
-        transit.addParticipant(new Opponent(TypesVehicleTransit.FERRARI,300));
-        transit.addParticipant(new Opponent(TypesVehicleTransit.FERRARI,500)); 
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.PORSHE, 670));
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.FERRARI, 650));
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.PORSHE, 500));
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.PORSHE, 670));
     }
 
         @Override

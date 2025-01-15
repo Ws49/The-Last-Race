@@ -1,4 +1,4 @@
-package io.github.game.stages.Game.Vehicles.base;
+package io.github.game.stages.Game.Vehicles.Transit;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
-import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
+import io.github.game.stages.Game.Vehicles.base.Vehicles;
 
 public abstract class TransitVehicles extends Vehicles implements TransitParticipant {
 

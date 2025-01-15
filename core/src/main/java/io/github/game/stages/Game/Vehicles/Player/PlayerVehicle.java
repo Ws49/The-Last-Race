@@ -1,4 +1,4 @@
-package io.github.game.stages.Game.Vehicles.base;
+package io.github.game.stages.Game.Vehicles.Player;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import io.github.game.AssetsControl.AssetsControl;
+import io.github.game.stages.Game.Vehicles.base.Vehicles;
 
 public class PlayerVehicle extends Vehicles {
     private int playerX;
@@ -23,12 +24,16 @@ public class PlayerVehicle extends Vehicles {
     private BitmapFont fontSpeed;
     private BitmapFont fontPosition;
     private int position;
+    private TypesPlayer type;
 
-    public PlayerVehicle() {
+    private static PlayerVehicle player;
+
+    private PlayerVehicle(TypesPlayer type) {
         super(370, 0, 300, 200);
         setColor(Color.WHITE);
+        this.type = type;
         durationAnimation = 0f;
-        textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati", new Vector2(70, 41));
+        textureRegions = type.getTextures();
         animation = AssetsControl.getInstanceAssetsControl().getAnimation(textureRegions, 0, durationAnimation);
         this.currentTRegion = AssetsControl.getInstanceAssetsControl().getCurrentRegion(animation);
         fontSpeed = AssetsControl.getInstanceAssetsControl().getFont("Font/Pixel.ttf", 24);
@@ -40,28 +45,35 @@ public class PlayerVehicle extends Vehicles {
         verifySpeed = false;
         isCollision = false;
         isOneTexutre = true;
-
     }
 
+    public static PlayerVehicle getPlayer(TypesPlayer type) {
+        if (player == null) {
+            player = new PlayerVehicle(type);
+        }else{
+            player.setType(type);
+        }
+        return player;
+    }
 
     @Override
     public void draw(SpriteBatch batch) {
         super.draw(batch);
         batch.draw(velocimeter, 730, -50, 350, 350);
         fontSpeed.setColor(Color.CYAN);
-        fontPosition.setColor(Color.BLUE);
-        fontSpeed.draw(batch,  String.valueOf(getAccelerate()), 860, 130);
-        fontPosition.draw(batch, String.valueOf(position),800, 650);
-        fontSpeed.draw(batch,  "ST", 900, 600);
+        fontPosition.setColor(Color.CYAN);
+        fontSpeed.draw(batch, String.valueOf(getAccelerate()), 860, 130);
+        fontPosition.draw(batch, String.valueOf(position), 800, 650);
+        fontSpeed.draw(batch, "ST", 900, 600);
     }
 
     private void speedUp() {
         columnFrame = 0;
-        if (accelerate < 600) {
+        if (accelerate < type.getMaxAcceleration()) {
             accelerate += 1;
             metersTraveledUp(accelerate);
         } else {
-            accelerate = 600;
+            accelerate = type.getMaxAcceleration();
             metersTraveledUp(accelerate);
         }
         if (accelerate < 0) {
@@ -69,7 +81,6 @@ public class PlayerVehicle extends Vehicles {
             metersTraveledUp(accelerate);
         }
     }
-    
 
     private void speedDown() {
         if (accelerate > 0) {
@@ -82,11 +93,9 @@ public class PlayerVehicle extends Vehicles {
         }
     }
 
-
-    // verifica se o x do player esta na grama e reduz velocidade
     private void speedDownOffRoad() {
 
-        if (accelerate >= 150 && accelerate <= 600) {
+        if (accelerate >= 150 && accelerate <= type.getMaxAcceleration()) {
             verifySpeed = true;
         } else {
             verifySpeed = false;
@@ -102,7 +111,7 @@ public class PlayerVehicle extends Vehicles {
     }
 
     private void moveToBack() {
-        if(getMetersTraveled() / 200 > 0){
+        if (getMetersTraveled() / 200 > 0) {
             if (accelerate > -300) {
                 accelerate -= 30;
             } else {
@@ -110,7 +119,7 @@ public class PlayerVehicle extends Vehicles {
             }
             metersTraveledUp(accelerate);
         }
-        
+
     }
 
     private void brake() {
@@ -119,7 +128,7 @@ public class PlayerVehicle extends Vehicles {
             metersTraveledUp(accelerate);
         }
     }
-    
+
     private void updatePLayerX(int playerX) {
         this.playerX += playerX;
 
@@ -139,47 +148,64 @@ public class PlayerVehicle extends Vehicles {
 
     private void updateTexture() {
         if (isOneTexutre) {
-            switch (columnFrame) {
-                case 0:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
-                            new Vector2(70, 41));
-                    break;
+            if (type == TypesPlayer.BUGATTI) {
+                switch (columnFrame) {
+                    case 0:
+                        textureRegions = type.getTextures();
+                        break;
 
-                case 1:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
-                            new Vector2(71, 41));
-                    break;
+                    case 1:
+                        textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
+                                new Vector2(71, 41));
+                        break;
 
-                case 2:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
-                            new Vector2(74, 41));
-                    break;
+                    case 2:
+                        textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
+                                new Vector2(74, 41));
+                        break;
 
-                default:
-                    textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
-                            new Vector2(70, 41));
-                    break;
+                    default:
+                        textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Buggati",
+                                new Vector2(70, 41));
+                        break;
+                }
+            }
+
+            if (type == TypesPlayer.LAMBORGHINI) {
+                switch (columnFrame) {
+                    case 0:
+                        textureRegions = type.getTextures();
+                        break;
+
+                    case 2:
+                        textureRegions = AssetsControl.getInstanceAssetsControl().getTextureRegions("Lamborghini",
+                                new Vector2(59, 37));
+                        break;
+
+                    default:
+                        textureRegions = type.getTextures();
+                        break;
+                }
             }
         }
     }
 
-    public void updatePosition(ArrayList<Float> metersTraveledOpponents){
+    public void updatePosition(ArrayList<Float> metersTraveledOpponents) {
         int positionAux = metersTraveledOpponents.size();
         for (Float metersOpponent : metersTraveledOpponents) {
-            if(getMetersTraveled() - metersOpponent > 0){
+            if (getMetersTraveled() - metersOpponent > 0) {
                 positionAux--;
-            }else{
+            } else {
                 positionAux++;
             }
         }
-    
-        position = (positionAux + 2)/ 2;
-       
+
+        position = (positionAux + 2) / 2;
+
     }
-    
+
     @Override
     public void update() {
-
         hitBox.x = posX + (width / 4);
         hitBox.y = posY + 54;
 
@@ -206,7 +232,24 @@ public class PlayerVehicle extends Vehicles {
                 updatePLayerX(-200);
             }
 
-            columnFrame = 1;
+            switch (type) {
+                case BUGATTI:
+                    columnFrame = 1;
+                    break;
+
+                case LAMBORGHINI:
+                    columnFrame = 2;
+                    textureRegions[lineFrame][columnFrame].flip(true, false);
+                    break;
+
+                case LAMBORGHINI_RED:
+                    columnFrame = 1;
+                    textureRegions[lineFrame][columnFrame].flip(true, false);
+                    break;
+
+                default:
+                    break;
+            }
 
         }
 
@@ -216,7 +259,22 @@ public class PlayerVehicle extends Vehicles {
                 updatePLayerX(200);
             }
 
-            columnFrame = 2;
+            switch (type) {
+                case BUGATTI:
+                    columnFrame = 2;
+                    break;
+
+                case LAMBORGHINI:
+                    columnFrame = 2;
+                    break;
+
+                case LAMBORGHINI_RED:
+                    columnFrame = 1;
+                    break;
+
+                default:
+                    break;
+            }
 
         }
 
@@ -228,6 +286,10 @@ public class PlayerVehicle extends Vehicles {
     public int getPlayerX() {
         return playerX;
     }
+    public void setAccelerate(int accelerate) {
+        this.accelerate = accelerate;
+    }
+
     public void setValueCurve(float valueCurve) {
         this.valueCurve = valueCurve;
     }
@@ -242,6 +304,15 @@ public class PlayerVehicle extends Vehicles {
 
     public int getAccelerate() {
         return (int) ((accelerate) * 0.25f);
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    private  void setType(TypesPlayer type) {
+        this.type = type;
+        textureRegions = type.getTextures();
     }
 
 }

@@ -1,11 +1,5 @@
-package io.github.game.stages.Game.Vehicles;
+package io.github.game.stages.Game.Vehicles.Transit;
 
-import io.github.game.stages.Game.Vehicles.Simple.JeepCar;
-import io.github.game.stages.Game.Vehicles.Simple.PoliceCar;
-import io.github.game.stages.Game.Vehicles.Simple.SimpleCar;
-import io.github.game.stages.Game.Vehicles.Simple.Truck;
-import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
-import io.github.game.stages.Game.Vehicles.base.TransitVehicles;
 //FACTORY
 public final class FactoryVehiclesTransit {
     public static TransitVehicles getVehicle(TypesVehicleTransit type){

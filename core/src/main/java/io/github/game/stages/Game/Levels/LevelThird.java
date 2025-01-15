@@ -6,18 +6,22 @@ import com.badlogic.gdx.math.Vector2;
 
 import io.github.game.AssetsControl.AssetsControl;
 import io.github.game.stages.AdditionalGame.UIobjects.CitySignsDecorationUI;
-import io.github.game.stages.Game.Vehicles.Opponents.Opponent;
-import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
-import io.github.game.stages.Game.Vehicles.base.PlayerVehicle;
+import io.github.game.stages.Game.InterfacesGame.TransitParticipant;
+import io.github.game.stages.Game.Vehicles.Player.PlayerVehicle;
+import io.github.game.stages.Game.Vehicles.Transit.TypesVehicleTransit;
+import io.github.game.stages.Game.Vehicles.Transit.FactoryOpponent;
 
-public class LevelThird extends Level {
-    public LevelThird(Screen context){
-        super(3,context,new PlayerVehicle());
+
+class LevelThird extends Level {
+    public LevelThird(Screen context, PlayerVehicle player){
+        super(3,context,player);
         textureBackground = AssetsControl.getInstanceAssetsControl().getTexture("race3");
         insertDrawablesUI();
         spawnVehicle();
-        transit.addParticipant(new Opponent(TypesVehicleTransit.FERRARI,300));
-        transit.addParticipant(new Opponent(TypesVehicleTransit.FERRARI,500));
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.FERRARI, 870));
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.FERRARI, 700));
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.PORSHE, 870));
+        transit.addParticipant((TransitParticipant)FactoryOpponent.getOponnent(TypesVehicleTransit.FERRARI, 700));
     }
 
     public void  insertDrawablesUI(){

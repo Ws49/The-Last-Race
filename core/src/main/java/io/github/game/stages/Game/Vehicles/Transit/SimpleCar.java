@@ -1,11 +1,8 @@
-package io.github.game.stages.Game.Vehicles.Simple;
+package io.github.game.stages.Game.Vehicles.Transit;
 
 import java.util.Random;
 
-import io.github.game.stages.Game.Vehicles.Types.TypesVehicleTransit;
-import io.github.game.stages.Game.Vehicles.base.TransitVehicles;
-
-public class SimpleCar extends TransitVehicles{
+class SimpleCar extends TransitVehicles{
     public SimpleCar(TypesVehicleTransit type){
         super(type);
             setMetersTraveled(new Random().nextInt(0,100000));

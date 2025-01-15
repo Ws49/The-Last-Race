@@ -16,7 +16,6 @@ import io.github.game.stages.AdditionalGame.UIobjects.CitySignsDecorationUI;
 import io.github.game.stages.AdditionalGame.UIobjects.CreditsBar;
 import io.github.game.stages.AdditionalGame.UIobjects.PanelSettings;
 import io.github.game.stages.AdditionalGame.UIobjects.TypesButtonUI;
-import io.github.game.stages.Game.Levels.LevelOne;
 
 public class Options extends Stage{
     private Texture menuBackgroundTexture;
@@ -25,7 +24,6 @@ public class Options extends Stage{
     private SpriteBatch batch;
     private BoxDrawablesUI drawablesUI;
     private ButtonUI continueButton;
-    private ButtonUI shopButton;
     private ButtonUI creditsButton;
     private ButtonUI mainMenuButton;
     private boolean isCredits;
@@ -38,9 +36,8 @@ public class Options extends Stage{
         assetsControl = AssetsControl.getInstanceAssetsControl();
         menuBackgroundTexture = assetsControl.getTexture("BackgroundMenu");
         continueButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.CONTINUE, 330, 480);
-        shopButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.SHOP, 330, 360);
-        creditsButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.CREDITS, 330, 240);
-        mainMenuButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.MAINMENU, 330, 120);
+        creditsButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.CREDITS, 330, 360);
+        mainMenuButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.MAINMENU, 330, 240);
         creditsBar = new CreditsBar();
         this.contextMainGame = contextMainGame;
         this.drawablesUI = drawables;
@@ -55,9 +52,8 @@ public class Options extends Stage{
         assetsControl = AssetsControl.getInstanceAssetsControl();
         menuBackgroundTexture = assetsControl.getTexture("BackgroundMenu");
         continueButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.CONTINUE, 330, 480);
-        shopButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.SHOP, 330, 360);
-        creditsButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.CREDITS, 330, 240);
-        mainMenuButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.MAINMENU, 330, 120);
+        creditsButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.CREDITS, 330, 360);
+        mainMenuButton = new ButtonUI(new ImageButton.ImageButtonStyle(),TypesButtonUI.MAINMENU, 330, 240);
         creditsBar = new CreditsBar();
         drawablesUI = new BoxDrawablesUI();
         drawablesUI.addDrawable(new CitySignsDecorationUI("ElementyCity1", new Vector2(30, 25), 0.15f, 810, 405));
@@ -74,7 +70,6 @@ public class Options extends Stage{
     
     public void setListenerButtons() {
         this.addActor(continueButton);
-        this.addActor(shopButton);
         this.addActor(creditsButton);
         this.addActor(mainMenuButton);
         this.addActor(creditsBar.getCloseButton());
@@ -82,22 +77,13 @@ public class Options extends Stage{
             if(!isCredits){
                 if(event.isHandled()){
                     continueButton.Play();
-                    ((GameScreen) contextMainGame).changeStage(new LevelOne(contextMainGame));
+                    ((GameScreen) contextMainGame).changeStage(new OptionsLevel(contextMainGame, drawablesUI));
                 }
                
             }
             return false;
         });
                 
-        shopButton.addListener(event->{
-            if(!isCredits){
-                if(event.isHandled()){
-                    shopButton.Play();
-                    //((GameScreen) mainGame).changeStage(new Shop(mainGame));
-                }
-            }
-            return false;
-        });
                 
         creditsButton.addListener(event->{
             if(!isCredits){
@@ -136,7 +122,6 @@ public class Options extends Stage{
     public void setColorButtonsOptions(Color c){
         continueButton.setColor(c);
         mainMenuButton.setColor(c);
-        shopButton.setColor(c);
         creditsButton.setColor(c);
     }
 
@@ -148,16 +133,12 @@ public class Options extends Stage{
         if(!isCredits){
             drawablesUI.update();
             continueButton.update();
-            shopButton.update();
             creditsButton.update();
             mainMenuButton.update();
             creditsBar.getCloseButton().setColor(new Color(255, 255, 255, 0f));
         }else{
             setColorButtonsOptions(new Color(255, 255, 255, 0f));
             creditsBar.update();
-            if(creditsBar.getScretLevel() >= 3){
-                ((GameScreen) contextMainGame).changeStage(new LevelOne(contextMainGame));
-            }
         }
     }
 
