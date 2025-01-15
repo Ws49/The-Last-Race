@@ -35,7 +35,7 @@ For example, `core:clean` removes `build` folder only from the `core` project.
 ## Link do Relatório Técnico
 [Relatório Técnico](https://docs.google.com/document/d/1smwhxf9OfrjdMUg-sGlvFJxaKbdXGmoeY3r6bMDTmT4/edit?usp=sharing )
 
-##Para Rodar
+## Para Rodar
 
 ```bash
 gradle run or gradlew run
